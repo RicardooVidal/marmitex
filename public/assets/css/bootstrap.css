@@ -3215,14 +3215,7 @@ fieldset[disabled] .btn-default.focus {
   background-color: #337ab7;
   border-color: #2e6da4;
 }
-/*margin: top, bottom, right, left */
-.btn-primary.session {
-  right: 85px;
-  position: absolute;
-  background-color: rgb(65, 113, 158);
-  color: #ffffff;
-  font-weight: bold;
-}
+
 .btn-primary:focus,
 .btn-primary.focus {
   color: #fff;
@@ -3436,14 +3429,7 @@ fieldset[disabled] .btn-warning.focus {
   border-color: #d43f3a;
   position: relative;
 }
-.btn-danger.session {
-  right: 0;
-  position: absolute;
-  padding: auto;
-  background-color: #c9302c(65, 113, 158);
-  color: #ffffff;
-  font-weight: bold;
-}
+
 .btn-danger:focus,
 .btn-danger.focus {
   color: #fff;

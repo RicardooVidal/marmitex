@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
     <script type="text/javascript" src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/jquery.mask.min.js') }}"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.js"></script>
@@ -22,6 +22,18 @@
         .btn-primary#insert {
             padding: 10px;
             margin-bottom: 10px;
+        }
+
+        .list-group-item {
+          padding: 25px;
+          margin: 10px 10px auto;
+          position: relative;
+        }
+
+        .buttons-register {
+          position:absolute;
+          right: 25px;
+          top: 20px;
         }
     </style>
     <title>Ricardo Vial</title>
@@ -62,6 +74,28 @@
 <div class="content">
     @yield('content')
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+      $('#fcep').mask('00000-000');
+  });
+
+  $(document).ready(function(){
+      $('#ftelefone').mask('(00) 0000-0000');
+  });
+
+  $(document).ready(function(){
+      $('#fcelular').mask('(00) 00000-0000');
+  });
+
+  $(document).ready(function(){
+      $('#fvalor').mask('000.000.000.000.000,00' , { reverse : true});
+  });
+
+  $(document).ready(function(){
+      $('#ffrete').mask('000.000.000.000.000,00' , { reverse : true});
+  });
+</script>
 
 </body>
 </html>

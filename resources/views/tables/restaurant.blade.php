@@ -50,13 +50,21 @@
             Nenhum registro encontrado!
         </div>
     @endif
-    <div class='content-session'>
+    @if(Session::has('success'))
+        <div class="alert alert-success" role="success">
+            <p>{{\Session::get('success')}}</p>
+        </div>
+    @endif
+    <ul class="list-group">
     @foreach($restaurants as $restaurant)
-        <h2>
+        <li class="list-group-item">  
             {{$restaurant['nome']}}
-        </h2>
-        <a class='btn btn-primary session' href='#'>Editar</a>
-        <a class='btn btn-danger session' href='#'>Excluir</a>
+            <div class="buttons-register">
+                <a class='btn btn-primary' href="/app/tabelas/restaurantes/editar/{{$restaurant['id']}}">Editar</a>
+                <a class='btn btn-danger' href='#'>Excluir</a>
+            </div>
+        </li>
     @endforeach
-    </div>
+    </ul>
+
 @endsection

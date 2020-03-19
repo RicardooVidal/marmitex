@@ -21,6 +21,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/app/tabelas', 'TableController@tables')->name('tables');
-Route::get('/app/tabelas/restaurantes', 'RestaurantsController@index')->name('restaurant');
-Route::get('/app/tabelas/restaurantes/inserir', 'RestaurantsController@create')->name('restaurant.create');
-Route::post('/app/tabelas/restaurantes/inserir', 'RestaurantsController@store')->name('restaurant.store');
+Route::get('/app/tabelas/restaurantes', 'RestaurantController@index')->name('restaurant');
+Route::get('/app/tabelas/restaurantes/inserir', 'RestaurantController@create')->name('restaurant.create');
+Route::post('/app/tabelas/restaurantes/inserir', 'RestaurantController@store')->name('restaurant.store');
+Route::get('/app/tabelas/restaurantes/editar/{id}', 'RestaurantController@edit')->name('restaurant.edit');
+Route::post('/app/tabelas/restaurantes/editar/{id}', 'RestaurantController@update')->name('restaurant.update');
