@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -35,6 +36,20 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        $user = user::where([['id','=','1'],['name','=', 'admin']])->first();
+        if (!$user)
+        {
+            User::create([
+                'name' => 'admin',
+                //'email' => $data['email'],
+                'password' => bcrypt('22361141'),
+            ]);
+        }
         $this->middleware('guest')->except('logout');
+    }
+
+    public function username() 
+    {
+        return 'name';
     }
 }

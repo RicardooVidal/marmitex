@@ -1,18 +1,18 @@
 @extends('layouts.index')
 
 @section('content')
-    <p><a href="javascript: history.go(-1)">Voltar para a página anterior</a></p>
+    <p><a href="/app/tabelas/restaurantes/">Voltar para a página anterior</a></p>
     <h1 class="display-1">Editar Restaurante</h1>
-    @if (count($errors) > 0)
+    @if(!count($errors) == 0)
         <div class="alert alert-danger" role="alert">
             @foreach($errors->all() as $error)
                 <ul><li>{{$error}}</li></ul>
             @endforeach
         </div>
     @endif
-    @if(Session::has('success'))
+    @if(!empty($success))
         <div class="alert alert-success" role="success">
-            <p>{{\Session::get('success')}}</p>
+            <p>{{ $success }}</p>
         </div>
     @endif
     <form id="formRestaurant"action="/app/tabelas/restaurantes/editar/{{$restaurant->id}}" method="POST">
@@ -38,11 +38,11 @@
             <input type="frete" class="form-control" id="ffrete" name="frete" placeholder="Frete" value="{{old('frete', $restaurant->frete)}}">
             <label for="responsavel">Responsável:</label>
             <input type="text"  class="form-control" id="ffresponsavel" name="responsavel" placeholder="Responsavel" value="{{old('responsavel', $restaurant->responsavel)}}" >
-            <input type="checkbox" id="chfrete" name="chfrete" value = 1>
+            <input type="checkbox" id="chfrete" name="chfrete" value = 1 {{$restaurant->cobfr === 1 ? 'checked' : '' }}>
             <label for="chfrete">Cobrar Frete</label>
-            <input type="checkbox" id="chadicional" name="chadicional" value = 1>
+            <input type="checkbox" id="chadicional" name="chadicional" value = 1 {{$restaurant->cobad === 1 ? 'checked' : '' }}>
             <label for="chadicional">Cobrar Adicional</label>
-            <input type="checkbox" id="chpadrao" name="chpadrao" value = 1>
+            <input type="checkbox" id="chpadrao" name="chpadrao" value = 1 {{$restaurant->padrao === 1 ? 'checked' : '' }}>
             <label for="chpadrao">Padrão</label><br/>
             <input type="submit" class="btn btn-primary" value="Alterar" >
         </div>

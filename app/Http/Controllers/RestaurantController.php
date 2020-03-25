@@ -44,52 +44,6 @@ class RestaurantController extends Controller
         return view('tables.restaurant.edit', compact('restaurant', 'id'));
     }
 
-    // Alterar Restaurante
-    public function update(Request $request, $id)
-    {
-
-        $messages = [
-            'required' => 'O campo :attribute deve ser preenchido.',
-        ];
-
-        $validator = Validator::make($request->all(), [
-            'nome'        => 'required|max:255',
-            'endereco'    => 'required|max:255',
-            'numero'      => 'required|max:255',
-            'bairro'      => 'required|max:255',
-            'cep'         => 'required|max:8',
-            'celular'     => 'required|max:11',
-            'valor'       => 'required',
-            'responsavel' => 'required'
-        ], $messages);
-
-        $restaurant = Restaurant::find($id);
-       if ($validator->fails()) {
-            return redirect('/app/tabelas/restaurantes/editar/'.$id)
-                ->withErrors($validator)
-                ->withInput();
-        }
-
-        $restaurant->nome         = $request->get('nome');
-        $restaurant->endereco     = $request->get('endereco');
-        $restaurant->numero       = $request->get('numero');
-        $restaurant->bairro       = $request->get('bairro');
-        $restaurant->cep          = $request->get('cep');
-        $restaurant->celular      = $request->get('celular');
-        $restaurant->vlr_m        = $request->get('valor');
-        $restaurant->telefone     = $request->get('telefone');
-        $restaurant->frete        = $request->get('frete');
-        $restaurant->responsavel  = $request->get('responsavel');
-        $restaurant->cobfr        = $request->get('chfrete');
-        $restaurant->cobad        = $request->get('chadicional');
-        $restaurant->padrao       = $request->get('chpadrao');
-        $restaurant->save();
-
-        $restaurants = Restaurant::all()->toArray();
-        return view('tables.restaurant', compact('restaurants'))->with('success', 'Restaurante atualizado');
-    }
-
-
     // Inserir Restaurante 
     public function store(Request $request)
     {
@@ -130,8 +84,77 @@ class RestaurantController extends Controller
             'cobad'       => $request->get('chadicional'),
             'padrao'      => $request->get('chpadrao')
         ]);
+        $this->verificaPadrao($request->get('chpadrao'));
         $restaurant->save();
-        return redirect()->route('restaurant.create')->with('success', 'Restaurante adicionado com Sucesso');
+        $restaurants = Restaurant::all()->toArray();
+        return view('tables.restaurant')->with('restaurants', $restaurants)->with('success', 'Restaurante adicionado com Sucesso.');
+
     }
 
+    // Alterar Restaurante
+    public function update(Request $request, $id)
+    {
+
+        $messages = [
+            'required' => 'O campo :attribute deve ser preenchido.',
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'nome'        => 'required|max:255',
+            'endereco'    => 'required|max:255',
+            'numero'      => 'required|max:255',
+            'bairro'      => 'required|max:255',
+            'cep'         => 'required|max:8',
+            'celular'     => 'required|max:11',
+            'valor'       => 'required',
+            'responsavel' => 'required'
+        ], $messages);
+
+        $restaurant = Restaurant::find($id);
+    if ($validator->fails()) {
+            return redirect('/app/tabelas/restaurantes/editar/'.$id)
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $restaurant->nome         = $request->get('nome');
+        $restaurant->endereco     = $request->get('endereco');
+        $restaurant->numero       = $request->get('numero');
+        $restaurant->bairro       = $request->get('bairro');
+        $restaurant->cep          = $request->get('cep');
+        $restaurant->celular      = $request->get('celular');
+        $restaurant->vlr_m        = $request->get('valor');
+        $restaurant->telefone     = $request->get('telefone');
+        $restaurant->frete        = $request->get('frete');
+        $restaurant->responsavel  = $request->get('responsavel');
+        $restaurant->cobfr        = $request->get('chfrete');
+        $restaurant->cobad        = $request->get('chadicional');
+        $restaurant->padrao       = $request->get('chpadrao');
+        $this->verificaPadrao($request->get('chpadrao'));
+        $restaurant->save();
+
+        $restaurants = Restaurant::all()->toArray();
+        return view('tables.restaurant')->with('restaurants', $restaurants)->with('success', 'Restaurante atualizado com Sucesso.');
+    }
+
+    // Deleta Restaurante
+    public function destroy($id)
+    {
+        $restaurant = Restaurant::find($id);
+        $restaurant->delete();
+        //return redirect()->route('restaurant.index')->with('success', 'Restaurante excluído com êxito');
+        $restaurants = Restaurant::all()->toArray();
+        return view('tables.restaurant')->with('restaurants', $restaurants)->with('success', 'Restaurante excluído com Sucesso.');
+    }
+
+    public function verificaPadrao($padrao)
+    {
+        $restaurants = Restaurant::where('padrao', '=', '1')->get();
+        if ($padrao == 1) {
+            foreach ($restaurants as $restaurant) {
+                $restaurant->padrao = 0;
+                $restaurant->save();
+            }
+        }
+    }
 }

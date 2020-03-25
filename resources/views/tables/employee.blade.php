@@ -1,7 +1,7 @@
 @extends('layouts.index')
 
 <style>
-    #imgDefault img {
+    #imgBlocked img {
         position: absolute;
         top: 3px;
         width: 25px;
@@ -12,9 +12,9 @@
 
 @section('content')
     <p><a href="/app/tabelas">Voltar para a página anterior</a></p>
-    <h1 class="display-1">Tabela de Restaurantes</h1>
-    <a class="btn btn-primary" id='insert' href="{{route('restaurant.create')}}">Inserir</a>
-    @if (count($restaurants) === 0)
+    <h1 class="display-1">Tabela de Funcionários</h1>
+    <a class="btn btn-primary" id='insert' href="{{route('employee.create')}}">Inserir</a>
+    @if (count($employees) === 0)
         <div class="alert alert-danger" role="alert">
             Nenhum registro encontrado!
         </div>
@@ -25,16 +25,16 @@
         </div>
     @endif
     <ul class="list-group">
-    @foreach($restaurants as $restaurant)
+    @foreach($employees as $employee)
         <li class="list-group-item"> 
-            {{$restaurant['nome']}}
+            {{$employee['nome']}}
             <div id="padrao">
             <div class="buttons-register">
-                @if($restaurant['padrao'] == 1)
-                    <div id="imgDefault"><img src="{{ asset('assets/images/confirmed.png') }}"></img></div>
+            @if($employee['bloqueado'] == 1)
+                    <div id="imgBlocked"><img src="{{ asset('assets/images/blocked.png') }}"></img></div>
                 @endif
-                <div id="btnEdit"><a class='btn btn-primary' href="/app/tabelas/restaurantes/editar/{{$restaurant['id']}}">Editar</a></div>
-                <div id="btnDelete"><form method="post" class="delete_form" action="{{action('RestaurantController@destroy', $restaurant['id'])}}">
+                <div id="btnEdit"><a class='btn btn-primary' href="/app/tabelas/funcionarios/editar/{{$employee['id']}}">Editar</a></div>
+                <div id="btnDelete"><form method="post" class="delete_form" action="{{action('EmployeeController@destroy', $employee['id'])}}">
                     {{csrf_field()}}
                     <input type="hidden" name="_method" value="DELETE"/>                
                     <button type="submit" class="btn btn-danger">Deletar</button></div>

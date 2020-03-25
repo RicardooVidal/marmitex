@@ -9,9 +9,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.js"></script>
     <style>
         .content {
-            width: 50%;
+            width: 60%;
             position: relative;
-            left: 25%;
+            left: 20%;
         }
 
         .form-group label {
@@ -32,9 +32,21 @@
 
         .buttons-register {
           position:absolute;
+          width: 200px;
           right: 25px;
           top: 20px;
         }
+
+        #btnEdit {
+          position:absolute;
+          left: 35%;
+        }
+
+        #btnDelete {
+          position:absolute;
+          left: 70%;
+        }
+
     </style>
     <title>Ricardo Vial</title>
 </head>
@@ -66,6 +78,23 @@
         </ul>
       </li>
       <li>
+        @if (Route::has('login'))
+          @auth
+          <a class="dropdown-item" href="{{ route('logout') }}"
+              onclick="event.preventDefault();
+              document.getElementById('logout-form').submit();">
+              {{ __('Sair') }}
+          </a>
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              @csrf
+          </form>
+          @else
+            <li><a href="{{ route('login') }}">Login</a></li>
+          @endauth
+        @endif
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+        </form>
       </li>
     </ul>
   </div>
