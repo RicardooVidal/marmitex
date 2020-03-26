@@ -19,7 +19,9 @@
         {{csrf_field()}}
         <div class="form-group">
             <label for="nome">Nome:</label>
-            <input type="text"  class="form-control" id="fnome" name="nome" placeholder="Nome do funcionário" value="{{old('nome', $employee->nome)}}" >
+            <input type="text"  class="form-control" id="fnome" name="nome" placeholder="Nome" value="{{old('nome', $employee->nome)}}" >
+            <label for="nome">Sobrenome:</label>
+            <input type="text"  class="form-control" id="fsobrenome" name="sobrenome" placeholder="Sobrenome" value="{{old('sobrenome', $employee->sobrenome)}}" >
             <label for="endereço">Endereço:</label>
             <input type="text"  class="form-control" id="fendereco" name="endereco" placeholder="Essa mensagem vai aparecer quando o usuário clicar neste nome" value="{{old('mensagem', $employee->mensagem)}}">
             <label for="nome">Bloqueado:</label>

@@ -63,6 +63,7 @@ class EmployeeController extends Controller
 
         $employee = new Employee([
             'nome'        => $request->get('nome'),
+            'sobrenome'   => $request->get('sobrenome'),
             'bloqueado'    => $request->get('bloqueado'),
             'observacao'      => $request->get('observacao'),
             'mensagem'      => $request->get('mensagem'),
@@ -93,8 +94,9 @@ class EmployeeController extends Controller
         }
 
         $employee->nome       = $request->get('nome');
+        $employee->sobrenome  = $request->get('sobrenome');
         $employee->mensagem   = $request->get('endereco');
-        $employee->bloqueado   = $request->get('bloqueado');
+        $employee->bloqueado  = $request->get('bloqueado');
         $employee->observacao = $request->get('observacao');
         $employee->save();
 

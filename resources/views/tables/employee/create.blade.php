@@ -20,6 +20,8 @@
         <div class="form-group">
             <label for="nome">Nome:</label>
             <input type="text"  class="form-control" id="fnome" name="nome" placeholder="Nome do Funcionário" value="{{old('nome')}}" >
+            <label for="nome">Sobrenome:</label>
+            <input type="text"  class="form-control" id="fsobrenome" name="sobrenome" placeholder="Sobrenome" value="{{old('sobrenome')}}" >
             <label for="nome">Mensagem:</label>
             <input type="text"  class="form-control" id="fmensagem" name="mensagem" placeholder="Essa mensagem vai aparecer quando o usuário clicar neste nome" value="{{old('mensagem')}}" >
             <label for="nome">Bloqueado:</label>

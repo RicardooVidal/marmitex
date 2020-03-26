@@ -16,9 +16,10 @@ class CreateEmployeesTable extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome');
-            $table->boolean('bloqueado');
-            $table->boolean('observacao');
-            $table->string('mensagem');
+            $table->string('sobrenome')->nullable();
+            $table->boolean('bloqueado')->nullable();
+            $table->boolean('observacao')->nullable();
+            $table->string('mensagem')->nullable();
             $table->timestamps();
         });
     }

@@ -54,10 +54,10 @@ class RestaurantController extends Controller
 
         $validator = Validator::make($request->all(), [
             'nome'        => 'required|max:255',
-            'endereco'    => 'required|max:255',
-            'numero'      => 'required|max:255',
-            'bairro'      => 'required|max:255',
-            'cep'         => 'required|max:8',
+            //'endereco'    => 'required|max:255',
+            //'numero'      => 'required|max:255',
+            //'bairro'      => 'required|max:255',
+            //'cep'         => 'required|max:8',
             'celular'     => 'required|max:11',
             'valor'       => 'required',
             'responsavel' => 'required'
@@ -101,10 +101,10 @@ class RestaurantController extends Controller
 
         $validator = Validator::make($request->all(), [
             'nome'        => 'required|max:255',
-            'endereco'    => 'required|max:255',
-            'numero'      => 'required|max:255',
-            'bairro'      => 'required|max:255',
-            'cep'         => 'required|max:8',
+            //'endereco'    => 'required|max:255',
+            //'numero'      => 'required|max:255',
+            //'bairro'      => 'required|max:255',
+            //'cep'         => 'required|max:8',
             'celular'     => 'required|max:11',
             'valor'       => 'required',
             'responsavel' => 'required'

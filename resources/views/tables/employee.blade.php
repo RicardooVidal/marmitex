@@ -27,14 +27,14 @@
     <ul class="list-group">
     @foreach($employees as $employee)
         <li class="list-group-item"> 
-            {{$employee['nome']}}
-            <div id="padrao">
+            {{$employee['nome'].' '.$employee['sobrenome']}}
             <div class="buttons-register">
             @if($employee['bloqueado'] == 1)
-                    <div id="imgBlocked"><img src="{{ asset('assets/images/blocked.png') }}"></img></div>
-                @endif
-                <div id="btnEdit"><a class='btn btn-primary' href="/app/tabelas/funcionarios/editar/{{$employee['id']}}">Editar</a></div>
-                <div id="btnDelete"><form method="post" class="delete_form" action="{{action('EmployeeController@destroy', $employee['id'])}}">
+                <div id="imgBlocked"><img src="{{ asset('assets/images/blocked.png') }}"></img></div>
+            @endif
+            <div id="btnEdit"><a class='btn btn-primary' href="/app/tabelas/funcionarios/editar/{{$employee['id']}}">Editar</a></div>
+            <div id="btnDelete">
+                <form method="post" class="delete_form" action="{{action('EmployeeController@destroy', $employee['id'])}}">
                     {{csrf_field()}}
                     <input type="hidden" name="_method" value="DELETE"/>                
                     <button type="submit" class="btn btn-danger">Deletar</button></div>

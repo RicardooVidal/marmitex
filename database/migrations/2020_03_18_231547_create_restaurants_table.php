@@ -16,18 +16,18 @@ class CreateRestaurantsTable extends Migration
         Schema::create('restaurants', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome');
-            $table->string('endereco');
-            $table->string('bairro');
-            $table->string('numero');
-            $table->integer('cep');
-            $table->bigInteger('telefone');
+            $table->string('endereco')->nullable();
+            $table->string('bairro')->nullable();
+            $table->string('numero')->nullable();
+            $table->integer('cep')->nullable();
+            $table->bigInteger('telefone')->nullable();
             $table->biginteger('celular');
             $table->double('vlr_m');
-            $table->double('frete');
+            $table->double('frete')->nullable();
             $table->string('responsavel');
-            $table->boolean('cobfr'); // Cobra Frete ?
-            $table->boolean('cobad'); // Cobra Adicional ?
-            $table->boolean('padrao'); // É padrão ?
+            $table->boolean('cobfr')->nullable(); // Cobra Frete ?
+            $table->boolean('cobad')->nullable(); // Cobra Adicional ?
+            $table->boolean('padrao')->nullable(); // É padrão ?
             $table->timestamps();
         });
     }

@@ -6,6 +6,6 @@
     <ul class="list-group">
         <li><a href="/app/tabelas/restaurantes/" class="list-group-item">Restaurantes</a></li>
         <li><a href="/app/tabelas/funcionarios/" class="list-group-item">Funcionários</a></li>
-        <li><a href="#" class="list-group-item">Usuários</a></li>
+        <li><a href="/app/tabelas/usuarios/" class="list-group-item">Usuários</a></li>
     </ul>
 @endsection

@@ -37,3 +37,11 @@ Route::post('/app/tabelas/funcionarios/inserir', 'EmployeeController@store')->na
 Route::get('/app/tabelas/funcionarios/editar/{id}', 'EmployeeController@edit')->name('employee.edit');
 Route::post('/app/tabelas/funcionarios/editar/{id}', 'EmployeeController@update')->name('employee.update');
 Route::delete('/app/tabelas/funcionarios/deletar/{id}', 'EmployeeController@destroy')->name('employee.destroy');
+
+/* Usuários */
+Route::get('/app/tabelas/usuarios', 'UserController@index')->name('user.index');
+Route::get('/app/tabelas/usuarios/inserir', 'UserController@create')->name('user.create');
+Route::post('/app/tabelas/usuarios/inserir', 'UserController@store')->name('user.store');
+Route::get('/app/tabelas/usuarios/editar/{id}', 'UserController@edit')->name('user.edit'); // Desativado no menu
+Route::post('/app/tabelas/usuarios/editar/{id}', 'UserController@update')->name('user.update'); // Desativado
+Route::delete('/app/tabelas/usuarios/deletar/{id}', 'UserController@destroy')->name('user.destroy');
