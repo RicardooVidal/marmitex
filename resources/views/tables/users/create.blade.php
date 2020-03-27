@@ -22,12 +22,14 @@
     @endif
     <form id="formUser"action="{{route('user.create')}}" method="POST">
         {{csrf_field()}}
-        <div class="form-group">
-            <label for="nome">Usuario:</label>
-            <input type="text"  class="form-control" id="fusuario" name="usuario" placeholder="Usuário (Até 8 caracteres)" value="{{old('usuario')}}" maxlength="8" >
-            <label for="nome">Senha:</label>
-            <input type="password"  class="form-control" id="fusuario" name="senha" placeholder="Senha (Até 10 caracteres)" value="{{old('senha')}}" maxlength="10"><br/>
-            <input type="submit" class="btn btn-primary" value="Inserir" value = 1>
-        </div>
+        <li class="list-group-item">
+            <div class="form-group">
+                <label for="nome">Usuario:</label>
+                <input type="text"  class="form-control" id="fusuario" name="usuario" placeholder="Usuário (Até 8 caracteres)" value="{{old('usuario')}}" maxlength="8" >
+                <label for="nome">Senha:</label>
+                <input type="password"  class="form-control" id="fusuario" name="senha" placeholder="Senha (Até 10 caracteres)" value="{{old('senha')}}" maxlength="10"><br/>
+                <input type="submit" class="btn btn-primary" value="Inserir" value = 1>
+            </div>
+        </li>
     </form>
 @endsection

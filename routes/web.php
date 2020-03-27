@@ -45,3 +45,7 @@ Route::post('/app/tabelas/usuarios/inserir', 'UserController@store')->name('user
 Route::get('/app/tabelas/usuarios/editar/{id}', 'UserController@edit')->name('user.edit'); // Desativado no menu
 Route::post('/app/tabelas/usuarios/editar/{id}', 'UserController@update')->name('user.update'); // Desativado
 Route::delete('/app/tabelas/usuarios/deletar/{id}', 'UserController@destroy')->name('user.destroy');
+
+/*Configurações */
+Route::get('/app/configuracoes', 'ConfigController@index')->name('config.index');
+Route::post('/app/configuracoes/salvar', 'ConfigController@update')->name('config.update'); 

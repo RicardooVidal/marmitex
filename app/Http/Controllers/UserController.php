@@ -63,9 +63,9 @@ class UserController extends Controller
                 ->withInput();
         }
 
-        $user = User::where([['id','=','1'],['name','=', $request->get('usuario')]])->first();
+        $user = User::where([['name','=', $request->get('usuario')]])->first();
 
-        if (!$user) {
+        if ($user) {
             $users = User::all()->toArray();
             return view('tables.users.create')->with('users', $users)->with('exists', 'Usuário já cadastrado!.');
         }

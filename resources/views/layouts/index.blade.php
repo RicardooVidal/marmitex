@@ -74,6 +74,7 @@
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="/app/tabelas">Tabelas</a></li>
+          <li><a href="/app/configuracoes">Configurações</a></li>
           <li><a href="#">Sobre</a></li>
         </ul>
       </li>
@@ -105,6 +106,10 @@
 </div>
 
 <script type="text/javascript">
+  $(document).ready(function(){
+      $('#fhorario').mask('00:00');
+  });
+
   $(document).ready(function(){
       $('#fcep').mask('00000-000');
   });
