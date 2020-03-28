@@ -68,7 +68,7 @@ class RestaurantController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-
+        $this->verificaPadrao($request->get('chpadrao'), 0);
         $restaurant = new Restaurant([
             'nome'        => $request->get('nome'),
             'endereco'    => $request->get('endereco'),
@@ -84,7 +84,6 @@ class RestaurantController extends Controller
             'cobad'       => $request->get('chadicional'),
             'padrao'      => $request->get('chpadrao')
         ]);
-        $this->verificaPadrao($request->get('chpadrao'));
         $restaurant->save();
         $restaurants = Restaurant::all()->toArray();
         return view('tables.restaurant')->with('restaurants', $restaurants)->with('success', 'Restaurante adicionado com Sucesso.');
@@ -111,12 +110,12 @@ class RestaurantController extends Controller
         ], $messages);
 
         $restaurant = Restaurant::find($id);
-    if ($validator->fails()) {
+        if ($validator->fails()) {
             return redirect('/app/tabelas/restaurantes/editar/'.$id)
                 ->withErrors($validator)
                 ->withInput();
         }
-
+        $this->verificaPadrao($request->get('chpadrao'), $id);
         $restaurant->nome         = $request->get('nome');
         $restaurant->endereco     = $request->get('endereco');
         $restaurant->numero       = $request->get('numero');
@@ -130,7 +129,7 @@ class RestaurantController extends Controller
         $restaurant->cobfr        = $request->get('chfrete');
         $restaurant->cobad        = $request->get('chadicional');
         $restaurant->padrao       = $request->get('chpadrao');
-        $this->verificaPadrao($request->get('chpadrao'));
+        
         $restaurant->save();
 
         $restaurants = Restaurant::all()->toArray();
@@ -147,13 +146,16 @@ class RestaurantController extends Controller
         return view('tables.restaurant')->with('restaurants', $restaurants)->with('success', 'Restaurante excluÃ­do com Sucesso.');
     }
 
-    public function verificaPadrao($padrao)
+    // Verifica restaurante padrão
+    public function verificaPadrao($padrao, $id)
     {
         $restaurants = Restaurant::where('padrao', '=', '1')->get();
         if ($padrao == 1) {
             foreach ($restaurants as $restaurant) {
-                $restaurant->padrao = 0;
-                $restaurant->save();
+                if ($restaurant->id != $id) {
+                    $restaurant->padrao = 0;
+                    $restaurant->save();
+                }
             }
         }
     }

@@ -50,4 +50,21 @@
         </li>
     </form>
 
+    <script>
+        $(document).ready(function(){
+            $("#formRestaurant").submit(function() {
+                $("#fnome").unmask();
+                $("#fendereco").unmask();
+                $("#fnumero").unmask();
+                $("#fbairro").unmask();
+                $("#fcep").unmask();
+                $("#ftelefone").unmask();
+                $("#fcelular").unmask();
+                $("#fvalor").unmask();
+                $("#ffrete").unmask();
+                $("#ffresponsavel").unmask();
+            });
+        });
+    </script>
+
 @endsection

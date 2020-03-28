@@ -57,7 +57,7 @@
       <p class="navbar-brand"><a href="/home">Marmitex</a></p>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Cardápio</a></li>
+      <li class="active"><a href="/app/cardapio">Cardápio</a></li>
       <li class="active"><a href="#">Pedir</a></li>
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Fechamentos

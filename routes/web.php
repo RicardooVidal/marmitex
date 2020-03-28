@@ -49,3 +49,7 @@ Route::delete('/app/tabelas/usuarios/deletar/{id}', 'UserController@destroy')->n
 /*Configurações */
 Route::get('/app/configuracoes', 'ConfigController@index')->name('config.index');
 Route::post('/app/configuracoes/salvar', 'ConfigController@update')->name('config.update'); 
+
+/*Cardápio*/
+Route::get('/app/cardapio', 'MenuController@index')->name('menu.index');
+Route::post('/app/cardapio/editar/{res_id}', 'MenuController@update')->name('menu.update');
