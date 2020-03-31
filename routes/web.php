@@ -53,3 +53,6 @@ Route::post('/app/configuracoes/salvar', 'ConfigController@update')->name('confi
 /*Cardápio*/
 Route::get('/app/cardapio', 'MenuController@index')->name('menu.index');
 Route::post('/app/cardapio/editar/{res_id}', 'MenuController@update')->name('menu.update');
+
+/* Pedido */
+Route::get('/app/pedido', 'OrderController@index')->name('order.index');

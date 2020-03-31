@@ -27,7 +27,7 @@ class CreateRestaurantsTable extends Migration
             $table->string('responsavel');
             $table->boolean('cobfr')->nullable(); // Cobra Frete ?
             $table->boolean('cobad')->nullable(); // Cobra Adicional ?
-            $table->boolean('padrao')->nullable(); // É padrão ?
+            $table->boolean('padrao')->nullable(); // Ã‰ padrÃ£o ?
             $table->timestamps();
         });
     }
