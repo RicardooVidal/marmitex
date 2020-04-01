@@ -22,8 +22,9 @@ class CreateRestaurantsTable extends Migration
             $table->integer('cep')->nullable();
             $table->bigInteger('telefone')->nullable();
             $table->biginteger('celular');
-            $table->double('vlr_m');
+            $table->double('vlr_m')->nullable();
             $table->double('frete')->nullable();
+            $table->double('adicional')->nullable();
             $table->string('responsavel');
             $table->boolean('cobfr')->nullable(); // Cobra Frete ?
             $table->boolean('cobad')->nullable(); // Cobra Adicional ?
