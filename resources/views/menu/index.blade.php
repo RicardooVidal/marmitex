@@ -79,14 +79,14 @@
                 <li class="list-group-item">    
                     <div id="formMeals">
                         <div class="form-group">
-                            <input type="text" onkeyup="this.value = this.value.toUpperCase();"  class="form-control" id="fp1" name="p1" placeholder="Prato 1" value="{{ $menu['p1'] }}" maxlength="60" required>
-                            <input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control" id="fp2" name="p2" placeholder="Prato 2" value="{{ $menu['p2'] }}" maxlength="60">
-                            <input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control" id="fp3" name="p3" placeholder="Prato 3" value="{{ $menu['p3'] }}" maxlength="60">
-                            <input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control" id="fp4" name="p4" placeholder="Prato 4" value="{{ $menu['p4'] }}" maxlength="60">
-                            <input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control" id="fp5" name="p5" placeholder="Prato 5" value="{{ $menu['p5'] }}" maxlength="60">
-                            <input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control" id="fp6" name="p6" placeholder="Prato 6" value="{{ $menu['p6'] }}" maxlength="60">
-                            <input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control" id="fp7" name="p7" placeholder="Prato 7" value="{{ $menu['p7'] }}" maxlength="60">
-                            <input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control" id="fp8" name="p8" placeholder="Prato 8" value="{{ $menu['p8'] }}" maxlength="60">
+                            <input type="text"  class="form-control" id="fp1" name="p1" placeholder="Prato 1" value="{{ $menu['p1'] }}" maxlength="60">
+                            <input type="text"  class="form-control" id="fp2" name="p2" placeholder="Prato 2" value="{{ $menu['p2'] }}" maxlength="60">
+                            <input type="text"  class="form-control" id="fp3" name="p3" placeholder="Prato 3" value="{{ $menu['p3'] }}" maxlength="60">
+                            <input type="text"  class="form-control" id="fp4" name="p4" placeholder="Prato 4" value="{{ $menu['p4'] }}" maxlength="60">
+                            <input type="text"  class="form-control" id="fp5" name="p5" placeholder="Prato 5" value="{{ $menu['p5'] }}" maxlength="60">
+                            <input type="text"  class="form-control" id="fp6" name="p6" placeholder="Prato 6" value="{{ $menu['p6'] }}" maxlength="60">
+                            <input type="text"  class="form-control" id="fp7" name="p7" placeholder="Prato 7" value="{{ $menu['p7'] }}" maxlength="60">
+                            <input type="text"  class="form-control" id="fp8" name="p8" placeholder="Prato 8" value="{{ $menu['p8'] }}" maxlength="60">
                         </div>
                     </div>
                     <div id="formPrices">
@@ -150,7 +150,7 @@
                 $("#fp5").unmask();
                 $("#fp6").unmask();
                 $("#fp7").unmask();
-                $("#fp8").unmask(); 
+                $("#fp8").unmask();
                 $("#fpr1").unmask();
                 $("#fpr2").unmask();
                 $("#fpr3").unmask();
@@ -159,7 +159,6 @@
                 $("#fpr6").unmask();
                 $("#fpr7").unmask();
                 $("#fpr8").unmask();
-                //$("#fp1").val($(this).val().toUpperCase());
             });
         });
     </script>

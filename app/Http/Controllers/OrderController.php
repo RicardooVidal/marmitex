@@ -31,37 +31,4 @@ class OrderController extends Controller
         $restaurantDefault = Restaurant::find($res_id)->toArray();
         return view('order.index')->with('restaurantDefault', $restaurantDefault)->with('menu', $menu)->with('employees', $employees);
     }
-
-    public function store(Request $request) 
-    {
-
-        // if ($validator->fails()) {
-        //     return redirect('/app/tabelas/funcionarios/inserir')
-        //         ->withErrors($validator)
-        //         ->withInput();
-        // }
-
-        $res_id = $request->get('restaurante');
-
-        $menu = Menu::find(1);
-        $restaurantDefault = Restaurant::find($res_id)->toArray();
-
-        $order = new Order([
-            'res_id '        => $request->get('restaurante'),
-            'func_id'   => $request->get('funcionario'),
-            'prato'    => $request->get('prato'),
-            'quantidade'      => 1,
-            'data'      => date("Y-m-d"),
-
-            'mensagem'      => $request->get('mensagem'),
-        ]);
-        $employee->save();
-        $employees = Employee::all()->toArray();
-        return view('tables.employee')->with('employees', $employees)->with('success', 'Funcionário adicionado com Sucesso.');
-
-        echo $request->get('funcionario');
-        echo $request->get('prato');
-        echo $request->get('observacao');
-        echo $request->get('restaurante');
-    }
 }

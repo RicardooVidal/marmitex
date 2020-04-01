@@ -96,161 +96,59 @@
         width:20%;
     }
 
-    #observationContainer{
-        position: relative;
-        display: none;
-    }
-
-    #observationContainer button{
-        margin-top: 5px;
-    }
-
 </style>
 
 @section('content')
     <p><a href="/">Voltar para a página anterior</a></p>
-    @if ($menu['p1'] === '')
-        <div class="alert alert-danger" role="alert">
-            Cardápio não liberado!
+    <h1 class="display-1">Cardápio do Dia - {{ date("d/m/Y")}}</h1>
+    <div id="restaurantContainer">
+        <h4 id="restaurantTitle" class="display-1">Restaurante: {{ $restaurantDefault['nome'] }}</h4>
+        <h4 id="restaurantResponsible" class="display-1">Responsável: {{ $restaurantDefault['responsavel'] }}</h4>
+        <div id="restaurantTelephone" class="display-1"><h4>Telefone: {{ $restaurantDefault['telefone'] }}</h4></div>
+        <div id="restaurantCellphone" class="display-1"><h4>Celular: {{ $restaurantDefault['celular'] }}</h4></div>
+    </div>
+    <div id="orderContainer">
+        <div id="mealsContainer">
+            <a href="#"><p id="prato1" class="mealsLabels" value="1">1.{{ $menu['p1']}}</p></a>
+            <a href="#"><p id="prato2" class="mealsLabels" value="2">2.{{ $menu['p2']}}</p></a>
+            <a href="#"><p id="prato3" class="mealsLabels" value="3">3.{{ $menu['p3']}}</p></a>
+            <a href="#"><p id="prato4" class="mealsLabels" value="4">4.{{ $menu['p4']}}</p></a>
+            <a href="#"><p id="prato5" class="mealsLabels" value="5">5.{{ $menu['p5']}}</p></a>
+            <a href="#"><p id="prato6" class="mealsLabels" value="6">6.{{ $menu['p6']}}</p></a>
+            <a href="#"><p id="prato7" class="mealsLabels" value="7">7.{{ $menu['p7']}}</p></a>
+            <a href="#"><p id="prato8" class="mealsLabels" value="8">8.{{ $menu['p8']}}</p></a>
         </div>
-    @else
-        <h1 class="display-1">Cardápio do Dia - {{ date("d/m/Y")}}</h1>
-        <div id="restaurantContainer">
-            <h4 id="restaurantTitle" class="display-1">Restaurante: {{ $restaurantDefault['nome'] }}</h4>
-            <h4 id="restaurantResponsible" class="display-1">Responsável: {{ $restaurantDefault['responsavel'] }}</h4>
-            <div id="restaurantTelephone" class="display-1"><h4>Telefone: {{ $restaurantDefault['telefone'] }}</h4></div>
-            <div id="restaurantCellphone" class="display-1"><h4>Celular: {{ $restaurantDefault['celular'] }}</h4></div>
-        </div>
-        <div id="orderContainer">
-            <div id="mealsContainer">
-                <div class="alert alert-info">
-                    <strong>Selecione um nome e em seguida clique no prato.</strong>
-                </div>
-                @for ($i = 1; $i <= 8; $i++)
-                    @if ($menu['p'.$i ] != '')
-                        <a href="#"><p id="prato{{$i}}" class="mealsLabels" value="{{$i}}">{{$i}}.{{ $menu['p'.$i ]}}</p></a>
-                    @endif
-                @endfor
-                <div id="observationContainer">
-                    <div class="alert alert-info">
-                        <label for="observation">Observação</label>
-                        <form id="formOrder"action="" method="GET">
-                             {{csrf_field()}} 
-                            <input type="hidden" id="fidrestaurant" name="restaurante" value="{{ $restaurantDefault['id'] }}">
-                            <input type="hidden" id="fidemployee" name="funcionario">
-                            <input type="hidden" id="fidmeal" name="prato">
-                            <input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control" id="fobservation" name="observacao" placeholder="Ex: Sem feijão">
-                            <button id="confirmOrder" type="submit" class="btn btn-primary">Ok</button>
-                        </form>
-                        <button id="cancelOrder" onclick="cancelOrder()" class="btn btn-danger">Cancelar</button>
-                    </div>
-                </div>
-            </div>
-            <div id="employeesContainer">
-                <input type="text" class="form-control" id="femployeesSearch" name="employeesSearch" placeholder="Digite para buscar">
-                <table class="table">
-                    <thead>
+        <div id="employeesContainer">
+            <input type="text" class="form-control" id="employeesSearch" name="employeesSearch" placeholder="Digite para buscar"></input>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Clique no nome:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($employees as $employee)
                         <tr>
-                            <th>Clique no nome:</th>
+                            <td><a id="employee{{$employee['id']}}" href="#" value="{{$employee['id']}}">{{$employee['nome'].' '.$employee['sobrenome']}}</a></td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($employees as $employee)
-                            <tr>
-                                <td><a id="employee{{$employee['id']}}" href="#" value="{{$employee['id']}}">{{$employee['nome'].' '.$employee['sobrenome']}}</a></td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                </div>
+                    @endforeach
+                </tbody>
+            </table>
             </div>
         </div>
-    @endif
-        <script>
-        $(document).ready(function(){
-            inicializaVariaveis();
-            $("#mealsContainer a").css({"pointer-events": "none", "opacity": "0.5"});
+    </div>
 
-            $('#formOrder').submit(function(e) {
-                event.preventDefault();
-                confirmOrder(e)
-            });
-
-            $('#employeesContainer a').click(function(e) {
-                event.preventDefault();
-                $("#employeesContainer").css({"pointer-events": "none", "opacity": "0.5"});
-                $("#mealsContainer a").css({"pointer-events": "auto", "opacity": "1.0"});
-                selectEmployee(e);
-            });
-            
-            $('#mealsContainer a').click(function(e) {
-                event.preventDefault();
-                $("#mealsContainer a").css({"pointer-events": "none", "opacity": "0.5"});
-                $("#observationContainer").css({"display": "initial"});
-                $('body,html').animate({ scrollTop: $('body').height() }, 800);
-                $( "#observationContainer input" ).focus();
-                selectMeal(e);
-            });
-
-            // $('td').click(function(event) {
-            //     event.preventDefault();
-            //     $('employeesContainer td').attr('disabled', true);
-            //     $('#employeesContainer td').click(function(e) {
-            //         id = $(e.target).attr('value');
-            //         console.log(id);
-            //     }); 
-            // });
+    <script>
+    $(document).ready(function(){
+        var id = 0;
+        $('td').click(function(event) {
+            event.preventDefault();
+            $('employeesContainer td').attr('disabled', true);
+            $('#employeesContainer td').click(function(e) {
+                id = $(e.target).attr('value');
+                console.log(id);
+            }); 
         });
-
-        function inicializaVariaveis() {
-            var employeeId = 0;
-            var mealID = 0;
-            var employeeName = '';
-            var mealName = '';
-            var jc = '';
-        }
-
-        function selectEmployee(e) {
-            employeeId = $(e.target).attr('value');
-            employeeName = $(e.target).text();
-            console.log(employeeName);
-            console.log("Funcionário nº:"+employeeId);
-        }
-
-        function selectMeal(e) {
-            mealID = $(e.target).attr('value');
-            mealName = $(e.target).text();
-            console.log("Prato nº:"+mealID);
-        }
-
-        function confirmOrder(e) {
-            $('#fidemployee').val(employeeId);
-            $('#fidmeal').val(mealID);
-            jc = $.confirm({
-                title: 'Confirmar Pedido',
-                content: 'Funcionário: '+employeeName.toUpperCase() +'<br>' + ' ' +'Prato: ' +mealName + '<br>'+ 'Observação: '+ $("#fobservation").val(),
-                buttons: {
-                    confirmar: function () {
-                        callSaveOrderControllerFromForm(e);
-                    },
-                    cancelar: function () {
-                        cancelOrder();
-                    },
-                }
-            });
-        }
-
-        function callSaveOrderControllerFromForm(e) {
-            $( "#formOrder" ).submit();
-        }
-
-        function cancelOrder() {
-            console.clear();
-            console.log("Usuário nº:"+employeeId +" - "+ employeeName +" cancelou o pedido!");
-            inicializaVariaveis();
-            $("#employeesContainer").css({"pointer-events": "auto", "opacity": "1.0"});
-            $("#mealsContainer a").css({"pointer-events": "none", "opacity": "0.5"});
-            $("#observationContainer").css({"display": "none"});
-        }
-        </script>
+    });
+    </script>
 @endsection

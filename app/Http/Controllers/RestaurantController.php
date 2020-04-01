@@ -79,7 +79,6 @@ class RestaurantController extends Controller
             'vlr_m'       => $request->get('valor'),
             'telefone'    => $request->get('telefone'),
             'frete'       => $request->get('frete'),
-            'adicional'   => $request->get('adicional'),
             'responsavel' => $request->get('responsavel'),
             'cobfr'       => $request->get('chfrete'),
             'cobad'       => $request->get('chadicional'),
@@ -126,7 +125,6 @@ class RestaurantController extends Controller
         $restaurant->vlr_m        = $request->get('valor');
         $restaurant->telefone     = $request->get('telefone');
         $restaurant->frete        = $request->get('frete');
-        $restaurant->adicional    = $request->get('adicional');
         $restaurant->responsavel  = $request->get('responsavel');
         $restaurant->cobfr        = $request->get('chfrete');
         $restaurant->cobad        = $request->get('chadicional');

@@ -37,10 +37,8 @@
                 <input type="text"  class="form-control" id="fvalor" name="valor" placeholder="Valor" value="{{old('valor')}}" >
                 <label for="frete">Frete:</label>
                 <input type="frete" class="form-control" id="ffrete" name="frete" placeholder="Frete" value="{{old('frete')}}">
-                <label for="frete">Adicional:</label>
-                <input type="adicional" class="form-control" id="fadicional" name="adicional" placeholder="Adicional" value="{{old('adicional')}}">
                 <label for="responsavel">Responsável:</label>
-                <input type="text"  class="form-control" id="ffresponsavel" name="responsavel" placeholder="Responsável" value="{{old('responsavel')}}" >
+                <input type="text"  class="form-control" id="ffresponsavel" name="responsavel" placeholder="Responsavel" value="{{old('responsavel')}}" >
                 <input type="checkbox" id="chfrete" name="chfrete" value = 1>
                 <label for="chfrete">Cobrar Frete</label>
                 <input type="checkbox" id="chadicional" name="chadicional" value = 1>
@@ -64,7 +62,6 @@
                 $("#fcelular").unmask();
                 $("#fvalor").unmask();
                 $("#ffrete").unmask();
-                $("#fadicional").unmask();
                 $("#ffresponsavel").unmask();
             });
         });
