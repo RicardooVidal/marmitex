@@ -108,6 +108,11 @@
 </div>
 
 <script type="text/javascript">
+
+  $(document).ready(function(){
+        $('#pr1').mask('000.000.000.000.000,00' , { reverse : true});
+  });
+
   $(document).ready(function(){
       $('#fhorario').mask('00:00');
   });

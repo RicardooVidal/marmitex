@@ -37,6 +37,7 @@ class MenuController extends Controller
         if(!$this->verificaPedido($id)) {
             $this->cardapioDoDia();
             $menu = Menu::find(1);
+            echo $menu->res_id;
             $restaurantDefault = Restaurant::find($menu->res_id)->toArray();
             return view('menu.index')->with('restaurantDefault', $restaurantDefault)->with('menu', $menu);
         }

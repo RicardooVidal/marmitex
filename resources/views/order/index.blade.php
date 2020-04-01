@@ -129,6 +129,7 @@
                 @for ($i = 1; $i <= 8; $i++)
                     @if ($menu['p'.$i ] != '')
                         <a href="#"><p id="prato{{$i}}" class="mealsLabels" value="{{$i}}">{{$i}}.{{ $menu['p'.$i ]}}</p></a>
+                        <input type="text" id="pr{{$i}}" name="preco" value="{{ $menu['pr'.$i ]}}">
                     @endif
                 @endfor
                 <div id="observationContainer">
@@ -139,6 +140,7 @@
                             <input type="hidden" id="fidrestaurant" name="restaurante" value="{{ $restaurantDefault['id'] }}">
                             <input type="hidden" id="fidemployee" name="funcionario">
                             <input type="hidden" id="fidmeal" name="prato">
+                            <input type="text" id="fprmeal" name="preco">
                             <input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control" id="fobservation" name="observacao" placeholder="Ex: Sem feijão">
                             <button id="confirmOrder" type="submit" class="btn btn-primary">Ok</button>
                         </form>
@@ -155,6 +157,11 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if (empty($employees))
+                        <div class="alert alert-danger">
+                            <strong>Erro ao listar funcionários</strong>
+                        </div>
+                        @endif
                         @foreach($employees as $employee)
                             <tr>
                                 <td><a id="employee{{$employee['id']}}" href="#" value="{{$employee['id']}}">{{$employee['nome'].' '.$employee['sobrenome']}}</a></td>
@@ -205,6 +212,7 @@
         function inicializaVariaveis() {
             var employeeId = 0;
             var mealID = 0;
+            var prMeal = 0;
             var employeeName = '';
             var mealName = '';
             var jc = '';
@@ -215,17 +223,19 @@
             employeeName = $(e.target).text();
             console.log(employeeName);
             console.log("Funcionário nº:"+employeeId);
-        }
+        } q
 
         function selectMeal(e) {
             mealID = $(e.target).attr('value');
             mealName = $(e.target).text();
+            prMeal = $('#pr1').val();
             console.log("Prato nº:"+mealID);
         }
 
         function confirmOrder(e) {
             $('#fidemployee').val(employeeId);
             $('#fidmeal').val(mealID);
+            $('#fprmeal').val(prMeal);
             jc = $.confirm({
                 title: 'Confirmar Pedido',
                 content: 'Funcionário: '+employeeName.toUpperCase() +'<br>' + ' ' +'Prato: ' +mealName + '<br>'+ 'Observação: '+ $("#fobservation").val(),

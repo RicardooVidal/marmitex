@@ -32,6 +32,7 @@ class CreateMenusTable extends Migration
             $table->double('pr6')->nullable();
             $table->double('pr7')->nullable();
             $table->double('pr8')->nullable();
+            $table->date('data')->nullable();
             $table->boolean('fechado')->nullable();
             $table->timestamps();
         });

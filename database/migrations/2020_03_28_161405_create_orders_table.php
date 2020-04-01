@@ -24,7 +24,6 @@ class CreateOrdersTable extends Migration
             $table->double('valor_desconto')->nullable();
             $table->string('observacao');
             $table->double('frete');
-            $table->data('data');
             $table->boolean('situacao')->nullable();
             $table->double('adicional');
             $table->timestamps();

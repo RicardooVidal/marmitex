@@ -24,11 +24,11 @@ class CreateRestaurantsTable extends Migration
             $table->biginteger('celular');
             $table->double('vlr_m')->nullable();
             $table->double('frete')->nullable();
-            $table->double('padrao')->nullable();
+            $table->double('adicional')->nullable();
             $table->string('responsavel');
             $table->boolean('cobfr')->nullable(); // Cobra Frete ?
             $table->boolean('cobad')->nullable(); // Cobra Adicional ?
-            $table->boolean('padrao')->nullable(); // Ã‰ padrÃ£o?
+            $table->boolean('padrao')->nullable(); // É padrão?
             $table->timestamps();
         });
     }

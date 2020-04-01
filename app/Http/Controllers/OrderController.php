@@ -42,26 +42,24 @@ class OrderController extends Controller
         // }
 
         $res_id = $request->get('restaurante');
+        $prato = $request->get('restaurante');
 
-        $menu = Menu::find(1);
         $restaurantDefault = Restaurant::find($res_id)->toArray();
-
+        $vlr_m = 0;
+        $menu = Menu::where('valor', '!=', date("Y-m-d"))->get();
+        foreach ($Menu as $m) {
+            $valor = $m->valor;
+        }
         $order = new Order([
-            'res_id '        => $request->get('restaurante'),
-            'func_id'   => $request->get('funcionario'),
-            'prato'    => $request->get('prato'),
-            'quantidade'      => 1,
-            'data'      => date("Y-m-d"),
-
-            'mensagem'      => $request->get('mensagem'),
+            'res_id '    => $request->get('restaurante'),
+            'func_id'    => $request->get('funcionario'),
+            'prato'      => $request->get('prato'),
+            'quantidade' => 1,
+            'data'       => date("Y-m-d"),
+            'valor'      => $menu
         ]);
         $employee->save();
         $employees = Employee::all()->toArray();
         return view('tables.employee')->with('employees', $employees)->with('success', 'Funcionário adicionado com Sucesso.');
-
-        echo $request->get('funcionario');
-        echo $request->get('prato');
-        echo $request->get('observacao');
-        echo $request->get('restaurante');
     }
 }
