@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Menu;
 use App\Restaurant;
 use App\Employee;
+use App\Order;
 
 use Illuminate\Http\Request;
 
@@ -40,26 +41,27 @@ class OrderController extends Controller
         //         ->withErrors($validator)
         //         ->withInput();
         // }
+        $res_id      = $request->get('restaurante');
+        $prato       = $request->get('prato');
+        $vlr_m       = $request->get('preco');
+        $funcionario = $request->get('funcionario');
+        $observacao  = $request->get('observacao');
 
-        $res_id = $request->get('restaurante');
-        $prato = $request->get('restaurante');
-
-        $restaurantDefault = Restaurant::find($res_id)->toArray();
-        $vlr_m = 0;
-        $menu = Menu::where('valor', '!=', date("Y-m-d"))->get();
-        foreach ($Menu as $m) {
-            $valor = $m->valor;
-        }
         $order = new Order([
-            'res_id '    => $request->get('restaurante'),
-            'func_id'    => $request->get('funcionario'),
-            'prato'      => $request->get('prato'),
-            'quantidade' => 1,
-            'data'       => date("Y-m-d"),
-            'valor'      => $menu
+            'res_id'         => $res_id,
+            'func_id'        => $funcionario,
+            'prato'          => $prato,
+            'quantidade'     => 1,
+            'data'           => date("Y-m-d"),
+            'valor'          => $vlr_m,
+            'valor_desconto' => $vlr_m*0.50,
+            'situacao'       => 0,
+            'observacao'     => $observacao
         ]);
-        $employee->save();
-        $employees = Employee::all()->toArray();
-        return view('tables.employee')->with('employees', $employees)->with('success', 'Funcionário adicionado com Sucesso.');
+        $order->save();
+        $menu = Menu::find(1)->toArray();
+        $employees = Employee::all()->sortBy('nome')->toArray();
+        $restaurantDefault = Restaurant::find($res_id)->toArray();
+        return view('order.index')->with('restaurantDefault', $restaurantDefault)->with('menu', $menu)->with('employees', $employees)->with('success', 'Pedido inserido com sucesso.');
     }
 }

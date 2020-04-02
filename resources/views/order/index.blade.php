@@ -105,10 +105,26 @@
         margin-top: 5px;
     }
 
+    #orderConfirmed {
+        width: 100%;
+        position: relative;
+    }
+
+    #orderConfirmed img {
+        width: 50px;
+        height: 50px;
+    }
+
 </style>
 
 @section('content')
     <p><a href="/">Voltar para a página anterior</a></p>
+    @if(!empty($success))
+        <script>
+            console.log('Pedido finalizado com sucesso');
+            $.alert('<center><div id="orderConfirmed"><img src="{{ asset('assets/images/confirmed_1.png') }}"></img></div><br><p>Pedido efetuado</p></center>');
+        </script>
+    @endif
     @if ($menu['p1'] === '')
         <div class="alert alert-danger" role="alert">
             Cardápio não liberado!
@@ -129,22 +145,22 @@
                 @for ($i = 1; $i <= 8; $i++)
                     @if ($menu['p'.$i ] != '')
                         <a href="#"><p id="prato{{$i}}" class="mealsLabels" value="{{$i}}">{{$i}}.{{ $menu['p'.$i ]}}</p></a>
-                        <input type="text" id="pr{{$i}}" name="preco" value="{{ $menu['pr'.$i ]}}">
+                        <input type="hidden" id="pr{{$i}}" name="preco" value="{{ $menu['pr'.$i ]}}">
                     @endif
                 @endfor
                 <div id="observationContainer">
                     <div class="alert alert-info">
                         <label for="observation">Observação</label>
-                        <form id="formOrder"action="" method="GET">
+                        <form id="formOrder"action="" method="POST">
                              {{csrf_field()}} 
                             <input type="hidden" id="fidrestaurant" name="restaurante" value="{{ $restaurantDefault['id'] }}">
                             <input type="hidden" id="fidemployee" name="funcionario">
                             <input type="hidden" id="fidmeal" name="prato">
-                            <input type="text" id="fprmeal" name="preco">
+                            <input type="hidden" id="fprmeal" name="preco">
                             <input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control" id="fobservation" name="observacao" placeholder="Ex: Sem feijão">
                             <button id="confirmOrder" type="submit" class="btn btn-primary">Ok</button>
                         </form>
-                        <button id="cancelOrder" onclick="cancelOrder()" class="btn btn-danger">Cancelar</button>
+                        <button id="cancelOrder" onclick="cancelOrder()" class="btn btn-danger" style="position: absolute; left: 65px; top: 75px">Cancelar</button>
                     </div>
                 </div>
             </div>
@@ -223,12 +239,12 @@
             employeeName = $(e.target).text();
             console.log(employeeName);
             console.log("Funcionário nº:"+employeeId);
-        } q
+        } 
 
         function selectMeal(e) {
             mealID = $(e.target).attr('value');
             mealName = $(e.target).text();
-            prMeal = $('#pr1').val();
+            prMeal = $('#pr'+mealID).val();
             console.log("Prato nº:"+mealID);
         }
 
@@ -244,7 +260,7 @@
                         callSaveOrderControllerFromForm(e);
                     },
                     cancelar: function () {
-                        cancelOrder();
+                        this.close();
                     },
                 }
             });

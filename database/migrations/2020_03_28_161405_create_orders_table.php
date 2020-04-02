@@ -22,10 +22,10 @@ class CreateOrdersTable extends Migration
             $table->date('data')->nullable();
             $table->double('valor')->nullable();
             $table->double('valor_desconto')->nullable();
-            $table->string('observacao');
-            $table->double('frete');
+            $table->string('observacao')->nullable();
+            $table->double('frete')->nullable();
             $table->boolean('situacao')->nullable();
-            $table->double('adicional');
+            $table->double('adicional')->nullable();
             $table->timestamps();
         });
     }
