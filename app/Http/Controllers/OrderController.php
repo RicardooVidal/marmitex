@@ -46,7 +46,7 @@ class OrderController extends Controller
         $vlr_m       = $request->get('preco');
         $funcionario = $request->get('funcionario');
         $observacao  = $request->get('observacao');
-
+        //teste p/git
         $order = new Order([
             'res_id'         => $res_id,
             'func_id'        => $funcionario,
