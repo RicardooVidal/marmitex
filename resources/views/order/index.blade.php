@@ -1,3 +1,9 @@
+<?php
+    if($_SERVER["REQUEST_METHOD"] == "POST") {
+        echo "Fucking yeah";
+        //header('location: /app/pedido');
+    }    
+?>
 @extends('layouts.index')
 
 <style>
@@ -5,7 +11,6 @@
         position: relative;
         margin: 0 auto;
         width: 900px;
-        border: 1px solid;
         padding: 10px;
         margin-bottom: 10px;
     }
@@ -125,12 +130,42 @@
             $.alert('<center><div id="orderConfirmed"><img src="{{ asset('assets/images/confirmed_1.png') }}"></img></div><br><p>Pedido efetuado</p></center>');
         </script>
     @endif
+    @if(!empty($horario))
+        <script>
+            console.log('Pedido finalizado com sucesso');
+            $.alert('<center><div id="orderConfirmed"><img src="{{ asset('assets/images/confirmed_1.png') }}"></img></div><br><p>Pedido efetuado</p></center>');
+        </script>
+    @endif
+    @if(!empty($config['mensagem']))
+        <script>
+            var mensagem = ''
+            @foreach ($config as $m)
+                mensagem = "MENSAGEM: {!! $config['mensagem'] !!}";
+            @endforeach
+            console.log('CONFIG:' +mensagem );
+            $.alert(mensagem);
+        </script>
+    @endif
+    @if(!empty($horario))
+        <script>
+            $.confirm({
+                title: 'Pedido efetuado',
+                content: '',
+                type: 'green',
+                typeAnimated: true,
+                buttons: {
+                    close: function () {
+                    }
+                }
+            });
+        </script>
+    @endif
     @if ($menu['p1'] === '')
         <div class="alert alert-danger" role="alert">
             Cardápio não liberado!
         </div>
     @else
-        <h1 class="display-1">Cardápio do Dia - {{ date("d/m/Y")}}</h1>
+        <h1 class="display-1">Cardápio do Dia - {{ date("d/m/Y")}} | <strong>{{ $config['horario'] != "" ? "Limite: " .$config['horario'] : "" }}</strong> </h1>
         <div id="restaurantContainer">
             <h4 id="restaurantTitle" class="display-1">Restaurante: {{ $restaurantDefault['nome'] }}</h4>
             <h4 id="restaurantResponsible" class="display-1">Responsável: {{ $restaurantDefault['responsavel'] }}</h4>
@@ -140,7 +175,7 @@
         <div id="orderContainer">
             <div id="mealsContainer">
                 <div class="alert alert-info">
-                    <strong>Selecione um nome e em seguida clique no prato.</strong>
+                    <strong id="noticeOrder">Selecione um nome e em seguida clique no prato.</strong>
                 </div>
                 @for ($i = 1; $i <= 8; $i++)
                     @if ($menu['p'.$i ] != '')
@@ -151,13 +186,13 @@
                 <div id="observationContainer">
                     <div class="alert alert-info">
                         <label for="observation">Observação</label>
-                        <form id="formOrder"action="" method="POST">
+                        <form id="formOrder"action="/app/pedido/pedir" method="POST">
                              {{csrf_field()}} 
                             <input type="hidden" id="fidrestaurant" name="restaurante" value="{{ $restaurantDefault['id'] }}">
                             <input type="hidden" id="fidemployee" name="funcionario">
                             <input type="hidden" id="fidmeal" name="prato">
                             <input type="hidden" id="fprmeal" name="preco">
-                            <input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control" id="fobservation" name="observacao" placeholder="Ex: Sem feijão">
+                            <input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control" id="fobservation" name="observacao" placeholder="Ex: Sem feijão" autocomplete="off">
                             <button id="confirmOrder" type="submit" class="btn btn-primary">Ok</button>
                         </form>
                         <button id="cancelOrder" onclick="cancelOrder()" class="btn btn-danger" style="position: absolute; left: 65px; top: 75px">Cancelar</button>
@@ -191,6 +226,20 @@
     @endif
         <script>
         $(document).ready(function(){
+            $("#formRestaurant").submit(function() {
+                $("#fnome").unmask();
+                $("#fendereco").unmask();
+                $("#fnumero").unmask();
+                $("#fbairro").unmask();
+                $("#fcep").unmask();
+                $("#ftelefone").unmask();
+                $("#fcelular").unmask();
+                $("#fvalor").unmask();
+                $("#ffrete").unmask();
+                $("#fadicional").unmask();
+                $("#ffresponsavel").unmask();
+            });
+
             inicializaVariaveis();
             $("#mealsContainer a").css({"pointer-events": "none", "opacity": "0.5"});
 
@@ -225,6 +274,10 @@
             // });
         });
 
+        $(document).keyup(function(e) {
+            if (e.keyCode === 27) cancelOrder();   // esc
+        });
+
         function inicializaVariaveis() {
             var employeeId = 0;
             var mealID = 0;
@@ -237,6 +290,7 @@
         function selectEmployee(e) {
             employeeId = $(e.target).attr('value');
             employeeName = $(e.target).text();
+            $("#noticeOrder").text('SELECIONADO: ' +employeeName);
             console.log(employeeName);
             console.log("Funcionário nº:"+employeeId);
         } 
@@ -245,6 +299,7 @@
             mealID = $(e.target).attr('value');
             mealName = $(e.target).text();
             prMeal = $('#pr'+mealID).val();
+            $("#noticeOrder").text('SELECIONADO: ' +employeeName +' > PRATO: ' +mealID);
             console.log("Prato nº:"+mealID);
         }
 
@@ -266,6 +321,19 @@
             });
         }
 
+        function cancelledDueTime() {
+            $.confirm({
+                title: 'Pedido não efetuado!',
+                content: 'Devido ao limite de horário. Entre em contato com o administrador.',
+                type: 'red',
+                typeAnimated: true,
+                buttons: {
+                    close: function () {
+                    }
+                }
+            });
+        }
+
         function callSaveOrderControllerFromForm(e) {
             $( "#formOrder" ).submit();
         }
@@ -277,6 +345,7 @@
             $("#employeesContainer").css({"pointer-events": "auto", "opacity": "1.0"});
             $("#mealsContainer a").css({"pointer-events": "none", "opacity": "0.5"});
             $("#observationContainer").css({"display": "none"});
+            $("#noticeOrder").text('Selecione um nome e em seguida clique no prato.');
         }
         </script>
 @endsection

@@ -56,4 +56,4 @@ Route::post('/app/cardapio/editar/{res_id}', 'MenuController@update')->name('men
 
 /* Pedido */
 Route::get('/app/pedido', 'OrderController@index')->name('order.index');
-Route::post('/app/pedido', 'OrderController@store')->name('order.store');
+Route::post('/app/pedido/pedir', 'OrderController@store')->name('order.store');
