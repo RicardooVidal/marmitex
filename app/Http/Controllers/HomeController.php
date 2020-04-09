@@ -23,6 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        session_start();
+        $_SESSION['globalMessage'] = 0;
         return view('home');
     }
 }

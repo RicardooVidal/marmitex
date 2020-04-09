@@ -23,7 +23,7 @@
                 <input type="text"  class="form-control" id="fnome" name="nome" placeholder="Nome" value="{{old('nome', $employee->nome)}}" >
                 <label for="nome">Sobrenome:</label>
                 <input type="text"  class="form-control" id="fsobrenome" name="sobrenome" placeholder="Sobrenome" value="{{old('sobrenome', $employee->sobrenome)}}" >
-                <label for="endereço">Endereço:</label>
+                <label for="endereço">Mensagem:</label>
                 <input type="text"  class="form-control" id="fendereco" name="endereco" placeholder="Essa mensagem vai aparecer quando o usuário clicar neste nome" value="{{old('mensagem', $employee->mensagem)}}">
                 <label for="nome">Bloqueado:</label>
                 <input type="radio" id="sim" name="bloqueado" value="1" {{$employee->bloqueado === 1 ? 'checked' : '' }}>
