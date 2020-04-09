@@ -61,17 +61,18 @@ class OrderController extends Controller
             $menu = Menu::find(1)->toArray();
             $employees = Employee::all()->sortBy('nome')->toArray();
             $restaurantDefault = Restaurant::find($res_id)->toArray();
-            return redirect()->back()->with('restaurantDefault', $restaurantDefault)->with('menu', $menu)->with('employees', $employees)->with('horario', 'Pedido não efetuado. Fora de horário.');
+            return redirect()->back()->with('restaurantDefault', $restaurantDefault)->with('menu', $menu)->with('employees', $employees)->with('timeOut', ['Pedido não efetuado. Fora de horário.']);
         }
 
         $order->save();
         $menu = Menu::find(1)->toArray();
         $employees = Employee::all()->sortBy('nome')->toArray();
         $restaurantDefault = Restaurant::find($res_id)->toArray();
-        return redirect()->back()->with('restaurantDefault', $restaurantDefault)->with('menu', $menu)->with('employees', $employees)->with('success', 'Pedido inserido com sucesso.');
+        return redirect()->back()->with('restaurantDefault', $restaurantDefault)->with('menu', $menu)->with('employees', $employees)->with('success', ['Pedido inserido com sucesso.']);
     }
 
-    public function time(): bool {
+    public function time(): bool 
+    {
         $config = Config::find(1)->get();
         $horario = '';
         foreach ($config as $c) {
@@ -85,5 +86,47 @@ class OrderController extends Controller
         }
 
         return false;
+    }
+
+    public function block($id) 
+    {
+        $employee = Employee::where('id', '=', $id)->get();
+        foreach ($employee as $e)
+        {
+            $block = $e->bloqueado;
+        }
+        if ($block === 1) {
+            return response()->json([
+                'isBlocked' => $block,
+              ]);
+        }
+    }
+
+    public function observation($id) 
+    {
+        $employee = Employee::where('id', '=', $id)->get();
+        foreach ($employee as $e)
+        {
+            $block = $e->observacao;
+        }
+        if ($block === 2) {
+            return response()->json([
+                'isBlocked' => $block,
+              ]);
+        }
+    }
+
+    public function message($id) 
+    {
+        $employee = Employee::where('id', '=', $id)->get();
+        foreach ($employee as $e)
+        {
+            $msg = $e->mensagem;
+        }
+        if (!empty($msg)) {
+            return response()->json([
+                'hasMessage' => $msg,
+              ]);
+        }
     }
 }

@@ -13,12 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+// Route::get('/', function () {
+//     return view('home');
+// });
 
 Auth::routes();
 
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/app/tabelas', 'TableController@tables')->name('tables');
 
@@ -57,3 +58,8 @@ Route::post('/app/cardapio/editar/{res_id}', 'MenuController@update')->name('men
 /* Pedido */
 Route::get('/app/pedido', 'OrderController@index')->name('order.index');
 Route::post('/app/pedido/pedir', 'OrderController@store')->name('order.store');
+Route::post('/app/pedido/bloqueio/{id}', 'OrderController@block')->name('order.block');
+Route::post('/app/pedido/observacao/{id}', 'OrderController@observation')->name('order.observation');
+Route::post('/app/pedido/mensagem/{id}', 'OrderController@message')->name('order.message');
+
+
