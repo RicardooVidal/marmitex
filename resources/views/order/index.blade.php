@@ -125,6 +125,14 @@
         display: none;
     }
 
+    #viewOrder {
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+        padding: 10px;
+        display: block;
+    }
+
     td, th {
         text-align: left;
         padding: 8px;
@@ -164,7 +172,7 @@
                 @foreach ($config as $m)
                     mensagem = "MENSAGEM: {!! $config['mensagem'] !!}";
                 @endforeach
-                console.log('CONFIG:' +mensagem );
+                console.log('CONFIG: ' +mensagem );
                 $.alert(mensagem);
             </script>
         @endif
@@ -175,6 +183,9 @@
             <div id="restaurantTelephone" class="display-1"><h4>Telefone: {{ $restaurantDefault['telefone'] }}</h4></div>
             <div id="restaurantCellphone" class="display-1"><h4>Celular: {{ $restaurantDefault['celular'] }}</h4></div>
         </div>
+        <div id="viewOrder" class="alert alert-info">
+            <strong><a href="/app/pedido/visualizar">CLIQUE AQUI PARA VISUALIZAR O PEDIDO DO DIA</a></strong>
+        </div>
         <div id="orderContainer">
             <div id="mealsContainer">
                 <div class="alert alert-info">
@@ -182,7 +193,7 @@
                 </div>
                 @for ($i = 1; $i <= 8; $i++)
                     @if ($menu['p'.$i ] != '')
-                        <a href="#"><p id="prato{{$i}}" class="mealsLabels" value="{{$i}}">{{$i}}.{{ $menu['p'.$i ]}}</p></a>
+                        <a href="#"><p id="prato{{$i}}" class="mealsLabels" value="{{$i}}">{{ $menu['p'.$i ]}}</p></a>
                         <input type="hidden" id="pr{{$i}}" name="preco" value="{{ $menu['pr'.$i ]}}">
                     @endif
                 @endfor
@@ -193,9 +204,9 @@
                              {{csrf_field()}} 
                             <input type="hidden" id="fidrestaurant" name="restaurante" value="{{ $restaurantDefault['id'] }}">
                             <input type="hidden" id="fidemployee" name="funcionario">
-                            <input type="hidden" id="fidmeal" name="prato">
+                            <input type="hidden" id="fmealName" name="prato">
                             <input type="hidden" id="fprmeal" name="preco">
-                            <input id="fobservation" type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control" id="fobservation" name="observacao" placeholder="Ex: Sem feijão" autocomplete="off" disabled="">
+                            <input id="fobservation" type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control" id="fobservation" name="observacao" placeholder="Ex: Sem feijão" autocomplete="off" maxlength="55" disabled="">
                             <button id="confirmOrder" type="submit" class="btn btn-primary">Ok</button>
                         </form>
                         <button id="cancelOrder" onclick="cancelOrder()" class="btn btn-danger" style="position: absolute; left: 65px; top: 75px">Cancelar</button>
@@ -288,7 +299,8 @@
 
         $(document).keyup(function(e) {
             if (e.keyCode === 27) cancelOrder();   // esc
-            if (e.keyCode === 12) confirmOrder(); // enter
+            if (e.keyCode === 13) confirmOrder(); // enter
+            if (e.keyCode === 86) viewOrder(); // enter
         });
 
         function inicializaVariaveis() {
@@ -298,15 +310,17 @@
             var employeeName = '';
             var mealName = '';
             var jc = '';
+            var hasOrdered = 0;
         }
 
         function selectEmployee(e) {
             employeeId = $(e.target).attr('value');
             employeeName = $(e.target).text();
             $("#noticeOrder").text('SELECIONADO: ' +employeeName);
+            hasOrder();
+            hasMessage();
             checkBlock();
             checkObservation();
-            hasMessage()
             console.log(employeeName);
             console.log("Funcionário nº:"+employeeId);
         } 
@@ -321,11 +335,12 @@
 
         function confirmOrder(e) {
             $('#fidemployee').val(employeeId);
-            $('#fidmeal').val(mealID);
+            $('#fmealName').val(mealName);
             $('#fprmeal').val(prMeal);
             jc = $.confirm({
                 title: 'Confirmar Pedido',
                 content: 'Funcionário: '+employeeName.toUpperCase() +'<br>' + ' ' +'Prato: ' +mealName + '<br>'+ 'Observação: '+ $("#fobservation").val(),
+                escapeKey: 'cancelar',
                 buttons: {
                     confirmar: function () {
                         callSaveOrderControllerFromForm(e);
@@ -362,6 +377,10 @@
             });
         }
 
+        function guest() {
+
+        }
+
         function checkObservation() {
             $.ajaxSetup({
                 headers: {
@@ -376,7 +395,6 @@
                 },
                 success:function(response){
                     if (response['isBlocked'] == 2) {
-                        console.log('blocked!');
                         observationBlocked();
                     }
                 },
@@ -396,11 +414,33 @@
                     "_token": "{{ csrf_token() }}",
                 },
                 success:function(response){
-                    if (response['hasMessage'].length === 0) {
+                    if (response['hasMessage'].length == 0) {
                         console.log('Mensagem: SEM MENSAGEM');
                     } else {
                         console.log('Mensagem:' +response['hasMessage']);
                         messageEmployee(response['hasMessage']);
+                    }
+                },
+            });
+        }
+
+        function hasOrder() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "/app/pedido/pediu/"+employeeId,
+                type:"POST",
+                data:{
+                    "_token": "{{ csrf_token() }}",
+                },
+                success:function(response){
+                    if (response['hasOrder'] == 1) {
+                        console.log(employeeName+ ' já pediu! Cancelando...');
+                        alreadyOrdered();
+                        cancelOrder();
                     }
                 },
             });
@@ -420,6 +460,10 @@
             //$("#observationBlocked").css({"display": "initial"});
         }
 
+        function alreadyOrdered() {
+            $.alert('<center><div id="orderNotification"><img src="{{ asset('assets/images/exclamation.png') }}"></img></div><h3>'+employeeName+' já pediu!<br/></h3>Pedido cancelado.</center>');
+        }
+
         function messageEmployee(msg) {
             $.alert('<h3>'+employeeName+',</h3><p>'+msg+'</p>');
         }
@@ -433,5 +477,32 @@
             $("#observationContainer").css({"visibility": "hidden"});
             $("#noticeOrder").text('Selecione um nome e em seguida clique no prato.');
         }
+
+        function viewOrder() {
+            $.confirm({
+                content: function(){
+                    var self = this;
+                    self.setContent('Checking callback flow');
+                    return $.ajax({
+                        url: 'bower.json',
+                        dataType: 'json',
+                        method: 'get'
+                    }).done(function (response) {
+                        self.setContentAppend('<div>Done!</div>');
+                    }).fail(function(){
+                        self.setContentAppend('<div>Fail!</div>');
+                    }).always(function(){
+                        self.setContentAppend('<div>Always!</div>');
+                    });
+                },
+                contentLoaded: function(data, status, xhr){
+                    self.setContentAppend('<div>Content loaded!</div>');
+                },
+                onContentReady: function(){
+                    this.setContentAppend('<div>Content ready!</div>');
+                }
+            });
+        }
+
         </script>
 @endsection

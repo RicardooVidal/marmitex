@@ -16,16 +16,16 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('res_id')->references('id')->on('restaurants');
-            $table->string('func_id')->references('id')->on('employees');;
+            $table->string('func_id')->references('id')->on('employees');
             $table->string('prato')->nullable();
             $table->integer('quantidade')->nullable();
             $table->date('data')->nullable();
-            $table->double('valor')->nullable();
-            $table->double('valor_desconto')->nullable();
+            $table->decimal('valor',5,2)->nullable();
+            $table->decimal('valor_desconto',5,2)->nullable();
             $table->string('observacao')->nullable();
-            $table->double('frete')->nullable();
+            $table->decimal('frete',5,2)->nullable();
             $table->boolean('situacao')->nullable();
-            $table->double('adicional')->nullable();
+            $table->decimal('adicional',5,2)->nullable();
             $table->timestamps();
         });
     }

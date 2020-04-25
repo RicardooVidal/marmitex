@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Restaurant;
 use App\Menu;
+use App\Helpers;
 
 class MenuController extends Controller
 {
@@ -48,6 +49,14 @@ class MenuController extends Controller
     // Atualiza cardápio
     public function update(Request $request, $res_id) {
         $menu = Menu::find(1);
+        $pr1 = \App\Helpers\AppHelper::instance()->convertToMoney($request->get('pr1'));
+        $pr2 = \App\Helpers\AppHelper::instance()->convertToMoney($request->get('pr2'));
+        $pr3 = \App\Helpers\AppHelper::instance()->convertToMoney($request->get('pr3'));
+        $pr4 = \App\Helpers\AppHelper::instance()->convertToMoney($request->get('pr4'));
+        $pr5 = \App\Helpers\AppHelper::instance()->convertToMoney($request->get('pr5'));
+        $pr6 = \App\Helpers\AppHelper::instance()->convertToMoney($request->get('pr6'));
+        $pr7 = \App\Helpers\AppHelper::instance()->convertToMoney($request->get('pr7'));
+        $pr8 = \App\Helpers\AppHelper::instance()->convertToMoney($request->get('pr8'));
         $menu->p1  = $request->get('p1');
         $menu->p2  = $request->get('p2');
         $menu->p3  = $request->get('p3');
@@ -56,14 +65,14 @@ class MenuController extends Controller
         $menu->p6  = $request->get('p6');
         $menu->p7  = $request->get('p7');
         $menu->p8  = $request->get('p8');
-        $menu->pr1 = $request->get('pr1');
-        $menu->pr2 = $request->get('pr2');
-        $menu->pr3 = $request->get('pr3');
-        $menu->pr4 = $request->get('pr4');
-        $menu->pr5 = $request->get('pr5');
-        $menu->pr6 = $request->get('pr6');
-        $menu->pr7 = $request->get('pr7');
-        $menu->pr8 = $request->get('pr8');
+        $menu->pr1 = $pr1;
+        $menu->pr2 = $pr2;
+        $menu->pr3 = $pr3;
+        $menu->pr4 = $pr4;
+        $menu->pr5 = $pr5;
+        $menu->pr6 = $pr6;
+        $menu->pr7 = $pr7;
+        $menu->pr8 = $pr8;
         $menu->save();
         $menu = Menu::find(1);
         $restaurantDefault = Restaurant::find($res_id)->toArray();

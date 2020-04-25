@@ -59,7 +59,17 @@ Route::post('/app/cardapio/editar/{res_id}', 'MenuController@update')->name('men
 Route::get('/app/pedido', 'OrderController@index')->name('order.index');
 Route::post('/app/pedido/pedir', 'OrderController@store')->name('order.store');
 Route::post('/app/pedido/bloqueio/{id}', 'OrderController@block')->name('order.block');
+Route::delete('/app/pedido/deletar/{id}', 'OrderController@destroy')->name('order.destroy');
 Route::post('/app/pedido/observacao/{id}', 'OrderController@observation')->name('order.observation');
 Route::post('/app/pedido/mensagem/{id}', 'OrderController@message')->name('order.message');
+Route::post('/app/pedido/pediu/{id}', 'OrderController@ordered')->name('order.ordered');
+Route::get('/app/pedido/visualizar', 'OrderController@view')->name('order.view');
+Route::post('/app/pedido/gerar', 'OrderController@generateOrder')->name('order.generate');
+Route::get('/app/pedido/etiquetas', 'OrderController@generateTags')->name('order.tags');
 
+/* Cobrança */
+
+Route::get('/app/cobranca', 'BillController@index')->name('bill.index');
+Route::post('/app/cobranca', 'BillController@generateBill')->name('bill.generateBill');
+Route::post('/app/cobranca/gerar', 'BillController@generateDropOfBill')->name('bill.dropBill');
 

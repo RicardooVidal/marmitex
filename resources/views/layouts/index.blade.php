@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
     <script type="text/javascript" src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/jquery.mask.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/FileSaver.js') }}"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
     <style>
@@ -66,7 +67,7 @@
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Fechamentos
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="#">Cobrança</a></li>
+          <li><a href="/app/cobranca">Cobrança</a></li>
           <li><a href="#">Consultar Pedidos Anteriores</a></li>
           <li><a href="#">Etiquetas do Dia</a></li>
           <li><a href="#">Abrir Último pedido</a></li>
@@ -111,7 +112,15 @@
 <script type="text/javascript">
 
   $(document).ready(function(){
-        $('#pr1').mask('000.000.000.000.000,00' , { reverse : true});
+    $('#ftotal').mask('000.000.000.000.000,00' , { reverse : true});
+  });
+
+  $(document).ready(function(){
+    $('#ftroco').mask('000.000.000.000.000,00' , { reverse : true});
+  });
+
+  $(document).ready(function(){
+    $('#pr1').mask('000.000.000.000.000,00' , { reverse : true});
   });
 
   $(document).ready(function(){
@@ -141,6 +150,12 @@
   $(document).ready(function(){
       $('#fadicional').mask('000.000.000.000.000,00' , { reverse : true});
   });
+
+  function pad(n, width, z) {
+    z = z || '0';
+    n = n + '';
+    return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+  }
 </script>
 
 </body>

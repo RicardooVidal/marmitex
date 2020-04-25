@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Restaurant;
+use App\Helpers;
 use Illuminate\Support\Facades\Validator;
 
 class RestaurantController extends Controller
@@ -68,6 +69,11 @@ class RestaurantController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
+
+        $valor =  \App\Helpers\AppHelper::instance()->convertToMoney($request->get('valor'));
+        $frete = \App\HelperS\AppHelper::instance()->convertToMoney($request->get('frete'));
+        $adicional = \App\HelperS\AppHelper::instance()->convertToMoney($request->get('adicional'));
+
         $this->verificaPadrao($request->get('chpadrao'), 0);
         $restaurant = new Restaurant([
             'nome'        => $request->get('nome'),
@@ -76,10 +82,10 @@ class RestaurantController extends Controller
             'bairro'      => $request->get('bairro'),
             'cep'         => $request->get('cep'),
             'celular'     => $request->get('celular'),
-            'vlr_m'       => $request->get('valor'),
+            'vlr_m'       => $valor,
             'telefone'    => $request->get('telefone'),
-            'frete'       => $request->get('frete'),
-            'adicional'   => $request->get('adicional'),
+            'frete'       => $frete,
+            'adicional'   => $adicional,
             'responsavel' => $request->get('responsavel'),
             'cobfr'       => $request->get('chfrete'),
             'cobad'       => $request->get('chadicional'),
@@ -117,16 +123,20 @@ class RestaurantController extends Controller
                 ->withInput();
         }
         $this->verificaPadrao($request->get('chpadrao'), $id);
+        $valor =  \App\Helpers\AppHelper::instance()->convertToMoney($request->get('valor'));
+        $frete =  \App\Helpers\AppHelper::instance()->convertToMoney($request->get('frete'));
+        $adicional = \App\Helpers\AppHelper::instance()->convertToMoney($request->get('adicional'));
+
         $restaurant->nome         = $request->get('nome');
         $restaurant->endereco     = $request->get('endereco');
         $restaurant->numero       = $request->get('numero');
         $restaurant->bairro       = $request->get('bairro');
         $restaurant->cep          = $request->get('cep');
         $restaurant->celular      = $request->get('celular');
-        $restaurant->vlr_m        = $request->get('valor');
+        $restaurant->vlr_m        = $valor;
         $restaurant->telefone     = $request->get('telefone');
-        $restaurant->frete        = $request->get('frete');
-        $restaurant->adicional    = $request->get('adicional');
+        $restaurant->frete        = $frete;
+        $restaurant->adicional    = $adicional;
         $restaurant->responsavel  = $request->get('responsavel');
         $restaurant->cobfr        = $request->get('chfrete');
         $restaurant->cobad        = $request->get('chadicional');

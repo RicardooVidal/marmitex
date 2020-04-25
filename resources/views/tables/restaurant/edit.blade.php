@@ -62,9 +62,9 @@
                 $("#fcep").unmask();
                 $("#ftelefone").unmask();
                 $("#fcelular").unmask();
-                $("#fvalor").unmask();
-                $("#ffrete").unmask();
-                $("#fadicional").unmask();
+                //$("#fvalor").unmask();
+                //$("#ffrete").unmask();
+                //$("#fadicional").unmask();
                 $("#ffresponsavel").unmask();
             });
         });
