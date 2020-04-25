@@ -1,0 +1,50 @@
+<div class='modal fade' id='getCodeModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+                    <div class='modal-dialog modal-lg' style='width: 75%;'>
+                    <div class='modal-content'>
+                        <div class='modal-header'>
+                            <h3 class='modal-title'><strong>Período: {{date('d-m-Y', strtotime(2000-01-01))}} até {{date('d-m-Y', strtotime(2020-04-30))}}</strong></h3>
+                        </div>
+                        <div class='modal-body'>
+                            <table class='table'>
+                                @foreach([{"id":1,"nome":"Andr\u00e9","sobrenome":"Ferreira","bloqueado":2,"observacao":1,"mensagem":null,"created_at":"2020-04-01T15:10:23.000000Z","updated_at":"2020-04-17T20:54:37.000000Z"},{"id":2,"nome":"Fabio","sobrenome":"Silva","bloqueado":2,"observacao":1,"mensagem":null,"created_at":"2020-04-01T15:11:09.000000Z","updated_at":"2020-04-20T19:20:12.000000Z"},{"id":3,"nome":"Ricardo","sobrenome":"Vidal","bloqueado":2,"observacao":2,"mensagem":null,"created_at":"2020-04-06T22:06:16.000000Z","updated_at":"2020-04-11T14:22:50.000000Z"},{"id":4,"nome":"Calopsita","sobrenome":"Soares","bloqueado":2,"observacao":2,"mensagem":null,"created_at":"2020-04-17T23:30:36.000000Z","updated_at":"2020-04-18T14:50:01.000000Z"}] as {"id":4,"nome":"Calopsita","sobrenome":"Soares","bloqueado":2,"observacao":2,"mensagem":null,"created_at":"2020-04-17T23:30:36.000000Z","updated_at":"2020-04-18T14:50:01.000000Z"})<td><h3><strong><Nome:</strong> Calopsita Soares</h3></td><tr>
+                                        <th>Nome</th>
+                                        <th>Restaurante</th>
+                                        <th>Prato</th>
+                                        <th>Observação</th>
+                                        <th>Valor</th>
+                                        <th>Frete</th>
+                                        <th>Adicional</th>
+                                        <th>Data</th>
+                                    </tr>
+                                    @foreach([{"id":51,"res_id":1,"func_id":"1","prato":"1","quantidade":1,"data":"2020-04-10","valor":"12.00","valor_desconto":"6.00","observacao":null,"frete":null,"situacao":0,"adicional":null,"created_at":"2020-04-10T17:35:35.000000Z","updated_at":"2020-04-10T17:35:35.000000Z"},{"id":52,"res_id":1,"func_id":"1","prato":"1","quantidade":1,"data":"2020-04-10","valor":"13.00","valor_desconto":"6.50","observacao":null,"frete":null,"situacao":0,"adicional":null,"created_at":"2020-04-10T18:11:18.000000Z","updated_at":"2020-04-10T18:11:18.000000Z"},{"id":53,"res_id":1,"func_id":"1","prato":"1","quantidade":1,"data":"2020-04-11","valor":"12.00","valor_desconto":"6.00","observacao":null,"frete":null,"situacao":0,"adicional":null,"created_at":"2020-04-11T14:23:43.000000Z","updated_at":"2020-04-11T14:23:43.000000Z"},{"id":62,"res_id":1,"func_id":"3","prato":"1","quantidade":1,"data":"2020-04-14","valor":"10.00","valor_desconto":"5.00","observacao":null,"frete":null,"situacao":0,"adicional":null,"created_at":"2020-04-14T19:07:41.000000Z","updated_at":"2020-04-14T19:07:41.000000Z"},{"id":71,"res_id":1,"func_id":"2","prato":"2","quantidade":1,"data":"2020-04-15","valor":"10.50","valor_desconto":"5.25","observacao":null,"frete":"3.75","situacao":0,"adicional":"5.75","created_at":"2020-04-15T21:43:50.000000Z","updated_at":"2020-04-15T21:44:50.000000Z"},{"id":72,"res_id":1,"func_id":"1","prato":"2","quantidade":1,"data":"2020-04-16","valor":"14.50","valor_desconto":"7.25","observacao":"TESTE","frete":"3.75","situacao":0,"adicional":"5.75","created_at":"2020-04-16T18:38:40.000000Z","updated_at":"2020-04-16T18:52:54.000000Z"},{"id":73,"res_id":1,"func_id":"1","prato":"1","quantidade":1,"data":"2020-04-17","valor":"10.50","valor_desconto":"5.25","observacao":null,"frete":"1.88","situacao":0,"adicional":"2.88","created_at":"2020-04-17T19:01:30.000000Z","updated_at":"2020-04-17T21:55:31.000000Z"},{"id":74,"res_id":1,"func_id":"3","prato":"1","quantidade":1,"data":"2020-04-17","valor":"10.50","valor_desconto":"5.25","observacao":null,"frete":"1.88","situacao":0,"adicional":"2.88","created_at":"2020-04-17T20:58:28.000000Z","updated_at":"2020-04-17T21:55:31.000000Z"},{"id":75,"res_id":1,"func_id":"2","prato":"1.FILE DE FRANGO GRELHADO","quantidade":1,"data":"2020-04-17","valor":"10.50","valor_desconto":"5.25","observacao":null,"frete":null,"situacao":0,"adicional":null,"created_at":"2020-04-17T23:02:14.000000Z","updated_at":"2020-04-17T23:02:14.000000Z"},{"id":76,"res_id":1,"func_id":"4","prato":"1.FILE DE FRANGO GRELHADO","quantidade":1,"data":"2020-04-17","valor":"10.50","valor_desconto":"5.25","observacao":null,"frete":null,"situacao":0,"adicional":null,"created_at":"2020-04-17T23:30:43.000000Z","updated_at":"2020-04-17T23:30:43.000000Z"},{"id":77,"res_id":1,"func_id":"4","prato":"3.COSTELA","quantidade":1,"data":"2020-04-18","valor":"10.50","valor_desconto":"5.25","observacao":null,"frete":null,"situacao":0,"adicional":null,"created_at":"2020-04-18T03:19:09.000000Z","updated_at":"2020-04-18T03:19:09.000000Z"},{"id":79,"res_id":1,"func_id":"1","prato":"1.CEBOLINHA FRITA","quantidade":1,"data":"2020-04-14","valor":"10.50","valor_desconto":"5.25","observacao":null,"frete":null,"situacao":0,"adicional":null,"created_at":"2020-04-14T14:15:57.000000Z","updated_at":"2020-04-14T14:15:57.000000Z"},{"id":80,"res_id":1,"func_id":"1","prato":"1.TESTE","quantidade":1,"data":"2020-04-18","valor":"10.50","valor_desconto":"5.25","observacao":null,"frete":null,"situacao":0,"adicional":null,"created_at":"2020-04-18T14:49:15.000000Z","updated_at":"2020-04-18T14:49:15.000000Z"},{"id":81,"res_id":1,"func_id":"4","prato":"1.FILE DE FRANGO EMPANADO","quantidade":1,"data":"2020-04-20","valor":"10.50","valor_desconto":"5.25","observacao":null,"frete":"0.94","situacao":0,"adicional":"1.44","created_at":"2020-04-20T18:33:31.000000Z","updated_at":"2020-04-20T20:03:10.000000Z"},{"id":82,"res_id":1,"func_id":"1","prato":"1.FILE DE FRANGO EMPANADO","quantidade":1,"data":"2020-04-20","valor":"10.50","valor_desconto":"5.25","observacao":"TESTE","frete":"0.94","situacao":0,"adicional":"1.44","created_at":"2020-04-20T18:38:48.000000Z","updated_at":"2020-04-20T20:03:10.000000Z"},{"id":83,"res_id":1,"func_id":"2","prato":"1.FILE DE FRANGO EMPANADO","quantidade":1,"data":"2020-04-20","valor":"10.50","valor_desconto":"5.25","observacao":"SEM FEIJ\u00c3O","frete":"0.94","situacao":0,"adicional":"1.44","created_at":"2020-04-20T19:20:25.000000Z","updated_at":"2020-04-20T20:03:10.000000Z"},{"id":84,"res_id":1,"func_id":"3","prato":"FILE DE FRANGO EMPANADO","quantidade":1,"data":"2020-04-20","valor":"10.50","valor_desconto":"5.25","observacao":"SEM FEIJ\u00c3O, SEM FAROFA, SEM SALADA","frete":"0.94","situacao":0,"adicional":"1.44","created_at":"2020-04-20T19:52:31.000000Z","updated_at":"2020-04-20T20:03:10.000000Z"},{"id":85,"res_id":1,"func_id":"1","prato":"TESTE","quantidade":1,"data":"2020-04-21","valor":"10.50","valor_desconto":"5.25","observacao":null,"frete":null,"situacao":0,"adicional":null,"created_at":"2020-04-21T18:49:10.000000Z","updated_at":"2020-04-21T18:49:10.000000Z"},{"id":86,"res_id":1,"func_id":"4","prato":"THOR","quantidade":1,"data":"2020-04-22","valor":"10.50","valor_desconto":"5.25","observacao":null,"frete":null,"situacao":0,"adicional":null,"created_at":"2020-04-22T18:48:26.000000Z","updated_at":"2020-04-22T18:48:26.000000Z"}] as {"id":86,"res_id":1,"func_id":"4","prato":"THOR","quantidade":1,"data":"2020-04-22","valor":"10.50","valor_desconto":"5.25","observacao":null,"frete":null,"situacao":0,"adicional":null,"created_at":"2020-04-22T18:48:26.000000Z","updated_at":"2020-04-22T18:48:26.000000Z"})
+                                        <tr class='order'>
+                                            @if (4 == 4)
+                                                <td id='name'>86</td>
+                                                <td id='restaurant'>{Restaurante da Mama}</td>
+                                                <td id='meal'>{THOR}</td>
+                                                <td id='observation'>{}</td>
+                                                <td class='priceDiscount'>{5.25}</td>
+                                                <td class='portage'>{}</td>
+                                                <td class='additional'>{}</td>
+                                                <td class='date'>{2020-04-22}</td>@endif
+                                        </tr>
+                                    @endforeach<tr>
+                                        <td><strong>Quantidade: {1}</strong></td>
+                                        <td></td>   
+                                        <td></td>   
+                                        <td></td>   
+                                        <td><strong>{{number_format(5.25,2)}}</strong></td>   
+                                        <td><strong>{{number_format(0,2)}}</strong></td>   
+                                        <td><strong>{{number_format(0,2)}}</strong></td>   
+                                        <td><strong>Total Geral: {{number_format(5.25,2)}}</strong></td>   
+                                    </tr>
+                                @endforeach
+                            </table>
+                        </div>
+                        <div class='modal-footer'>
+                            <button type='button' class='btn btn-primary' ng-click='ok()'>Gerar cobrança</button>
+                            <button type='button' class='btn btn-white' ng-click='cancel()'>Fechar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
