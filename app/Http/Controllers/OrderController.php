@@ -276,17 +276,26 @@ class OrderController extends Controller
         $orders = Order::where('data', '=', date("Y-m-d"))->get(); 
         $menu = Menu::find(1)->toArray();
 
-        // return response()->json([
-        //     'hasOrder' => 1,
-        //   ]);
         $zebra = app('App\Http\Controllers\ZebraPrinterController');
         $zebra->print("ZDesigner TLP 2844","Example.pdf");
-        //var_dump($orders);
         die();
+    }
 
-        // if () {
+    public function openLastOrder() 
+    {
+        $today = date("Y-m-d");
+        $menu = Menu::where('data', '=', $today)->get(); 
 
-        // }
+        foreach ($menu as $m) {
+            $m->fechado = 0;
+            $m->save();
+        }
+
+        if (count($menu) == 0) {
+            return view('home')->with('orderNotOpened', 'Pedido do dia não encontrado.');
+        }
+
+        return view('home')->with('orderOpened', 'Pedido aberto com sucesso.');
     }
 
 }

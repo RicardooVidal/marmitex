@@ -66,10 +66,16 @@ Route::post('/app/pedido/pediu/{id}', 'OrderController@ordered')->name('order.or
 Route::get('/app/pedido/visualizar', 'OrderController@view')->name('order.view');
 Route::post('/app/pedido/gerar', 'OrderController@generateOrder')->name('order.generate');
 Route::get('/app/pedido/etiquetas', 'OrderController@generateTags')->name('order.tags');
+Route::get('/app/pedido/abrir', 'OrderController@openLastOrder')->name('order.open');
+
 
 /* Cobrança */
 
 Route::get('/app/cobranca', 'BillController@index')->name('bill.index');
 Route::post('/app/cobranca', 'BillController@generateBill')->name('bill.generateBill');
 Route::post('/app/cobranca/gerar', 'BillController@generateDropOfBill')->name('bill.dropBill');
+
+/* Consulta de Pedido Anterior */
+Route::get('/app/consulta_pedido', 'PreviousOrderController@index')->name('previous.index');
+Route::post('/app/consulta_pedido/consultar', 'PreviousOrderController@consultPrevious')->name('previous.consult');
 

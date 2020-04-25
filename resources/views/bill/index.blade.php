@@ -34,7 +34,7 @@
 
 @section('content')
 
-    <p><a href="/app/tabelas/restaurantes/">Voltar para a página anterior</a></p>
+    <p><a href="/">Voltar para a página anterior</a></p>
     <h1 class="display-1">Cobrança</h1>
     @if(!count($errors) == 0)
         <div class="alert alert-danger" role="alert">
@@ -93,7 +93,7 @@
                                                         <td class="priceDiscount">{{$order->valor_desconto}}</td>
                                                         <td class="portage">{{$order->frete}}</td>
                                                         <td class="additional">{{$order->adicional}}</td>
-                                                        <td class="date">{{$order->data}}</td>
+                                                        <td class="date">{{date("d-m-Y", strtotime($order->data))}}</td>
                                                         <?php $quantidade++;
                                                             $valor += $order->valor_desconto;
                                                             $frete += $order->frete;
@@ -177,7 +177,7 @@
                                         <td class="priceDiscount">{{$order->valor_desconto}}</td>
                                         <td class="portage">{{$order->frete}}</td>
                                         <td class="additional">{{$order->adicional}}</td>
-                                        <td class="date">{{$order->data}}</td>
+                                        <td class="date">{{date("d-m-Y", strtotime($order->data))}}</td>
                                         <?php $quantidade++;
                                             $valor += $order->valor_desconto;
                                             $frete += $order->frete;
