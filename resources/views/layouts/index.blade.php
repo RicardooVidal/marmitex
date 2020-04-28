@@ -62,7 +62,7 @@
         }
 
         .footer {
-          position: absolute;
+          position: fixed;
           left: 0;
           bottom: 0;
           width: 100%;
@@ -76,10 +76,15 @@
         }
 
         /* Minimum resolution */
-        @media (min-width: 1024px) {
+        @media (max-width: 1024px) {
           .container-fluid {
-            position: fixed;
             width: 1024px;
+          }
+  
+          .content {
+            width: 500px;
+            position: relative;
+            left: 20%;
           }
         }
 
@@ -205,7 +210,7 @@
   }
 </script>
 <footer class="footer">
-  <p>No Version Yet! - Este programa só pode ser acessado na intranet da Kota Kota. A execução desta aplicação sem autorização não é permitida!</p>
+  <p>Esta aplicação só pode ser acessado na intranet da Kota Kota. A execução em outras estações sem autorização não é permitida!</p>
 </footer>
 </body>
 </html>

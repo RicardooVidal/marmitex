@@ -8,9 +8,9 @@
 
 <style>
 
-    .modal-dialog {
+    /* .modal-dialog {
         text-align: center;
-    }
+    } */
 
     table {
         font-size: 13px;
@@ -65,7 +65,7 @@
                             <div id="billDiv" class="modal-body">
                                     @foreach($employees as $employee)
                                         <div class="page-break"><h3><strong><Nome:</strong> {{$employee->nome.' '.$employee->sobrenome}}</h3> <p> Período: {{date("d-m-Y", strtotime($data_inicial))}} até {{date("d-m-Y", strtotime($data_final))}}</p></div><br/><br/><br/>
-                                        <table id="billTable" class="table">
+                                        <table id="billTable" class="table" style="font-size:15px;">
                                             <?php 
                                                 $quantidade = 0 ;
                                                 $total = 0;
@@ -77,10 +77,10 @@
                                                 <th>Nome</th>
                                                 <th>Restaurante</th>
                                                 <th>Prato</th>
-                                                <th>Observação</th>
-                                                <th>Valor</th>
-                                                <th>Frete</th>
-                                                <th>Adicional</th>
+                                                <th width="20%">Observação</th>
+                                                <th class="right_money">Valor</th>
+                                                <th class="right_money">Frete</th>
+                                                <th class="right_money">Adicional</th>
                                                 <th>Data</th>
                                             </tr>
                                             @foreach($orders as $order)
@@ -90,9 +90,9 @@
                                                         <td id="restaurant">{{$restaurant[$order->res_id-1]->nome}}</td>
                                                         <td id="meal">{{$order->prato}}</td>
                                                         <td id="observation">{{substr($order->observacao, 0, 15)}}</td>
-                                                        <td class="priceDiscount">{{$order->valor_desconto}}</td>
-                                                        <td class="portage">{{$order->frete}}</td>
-                                                        <td class="additional">{{$order->adicional}}</td>
+                                                        <td class="priceDiscount right_money">{{$order->valor_desconto}}</td>
+                                                        <td class="portage right_money">{{$order->frete}}</td>
+                                                        <td class="additional right_money">{{$order->adicional}}</td>
                                                         <td class="date">{{date("d-m-Y", strtotime($order->data))}}</td>
                                                         <?php $quantidade++;
                                                             $valor += $order->valor_desconto;
@@ -108,10 +108,10 @@
                                                 <td></td>   
                                                 <td></td>   
                                                 <td></td>   
-                                                <td><strong>{{number_format($valor,2)}}</strong></td>   
-                                                <td><strong>{{number_format($frete,2)}}</strong></td>   
-                                                <td><strong>{{number_format($adicional,2)}}</strong></td>   
-                                                <td><strong>Total: {{number_format($total,2)}}</strong></td>   
+                                                <td class="right_money"><strong>{{number_format($valor,2)}}</strong></td>   
+                                                <td class="right_money"><strong>{{number_format($frete,2)}}</strong></td>   
+                                                <td class="right_money"><strong>{{number_format($adicional,2)}}</strong></td>   
+                                                <td class="right_money"><strong>Total: {{number_format($total,2)}}</strong></td>   
                                             </tr>
                                         </table>
                                             <div class="employeeSignature">
@@ -162,10 +162,10 @@
                                     <th>Nome</th>
                                     <th>Restaurante</th>
                                     <th>Prato</th>
-                                    <th>Observação</th>
-                                    <th>Valor</th>
-                                    <th>Frete</th>
-                                    <th>Adicional</th>
+                                    <th width="20%">Observação</th>
+                                    <th class="right_money">Valor</th>
+                                    <th class="right_money">Frete</th>
+                                    <th class="right_money">Adicional</th>
                                     <th>Data</th>
                                 </tr>
                                 @foreach($orders as $order)
@@ -174,9 +174,9 @@
                                         <td id="restaurant">{{$restaurant[$order->res_id-1]->nome}}</td>
                                         <td id="meal">{{$order->prato}}</td>
                                         <td id="observation">{{substr($order->observacao, 0, 15)}}</td>
-                                        <td class="priceDiscount">{{$order->valor_desconto}}</td>
-                                        <td class="portage">{{$order->frete}}</td>
-                                        <td class="additional">{{$order->adicional}}</td>
+                                        <td class="priceDiscount right_money">{{$order->valor_desconto}}</td>
+                                        <td class="portage right_money">{{$order->frete}}</td>
+                                        <td class="additional right_money">{{$order->adicional}}</td>
                                         <td class="date">{{date("d-m-Y", strtotime($order->data))}}</td>
                                         <?php $quantidade++;
                                             $valor += $order->valor_desconto;
@@ -191,10 +191,10 @@
                                     <td></td>   
                                     <td></td>   
                                     <td></td>   
-                                    <td><strong>{{number_format($valor,2)}}</strong></td>   
-                                    <td><strong>{{number_format($frete,2)}}</strong></td>   
-                                    <td><strong>{{number_format($adicional,2)}}</strong></td>   
-                                    <td><strong>Total: {{number_format($total,2)}}</strong></td>   
+                                    <td class="right_money"><strong>{{number_format($valor,2)}}</strong></td>   
+                                    <td class="right_money"><strong>{{number_format($frete,2)}}</strong></td>   
+                                    <td class="right_money"><strong>{{number_format($adicional,2)}}</strong></td>   
+                                    <td class="right_money"><strong>Total: {{number_format($total,2)}}</strong></td>   
                                 </tr>
                             </table>
                             <div class="employeeSignature">
@@ -250,8 +250,11 @@
 
         function getCurrentTableByPage() {
 
-            var htmlContent = '<style>table {font-size:11px}</style>';
-                htmlContent += '<style>.page-break {page-break-before: always; height: 0; }</style>'
+            var htmlContent = '<style>table {font-size:15px}{font-family: sans-serif;}</style>';
+                htmlContent += '<style>.page-break {page-break-before: always;}{font-size: 15px;}</style>'
+                htmlContent += '<style>#observation {width:200px}</style>'
+                htmlContent += '<style>th {text-align: left}</style>'
+                htmlContent += '<style>.right_money {text-align: right}</style>'
                 htmlContent += '<style>.employeeSignature {text-align: center; }</style>'
                 htmlContent += '<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">';
                 htmlContent += $('#billDiv').html();
