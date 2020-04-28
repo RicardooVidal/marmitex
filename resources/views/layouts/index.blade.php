@@ -50,15 +50,67 @@
           position:absolute;
           left: 70%;
         }
+      
+        #orderNotification img {
+          width: 75px;
+          height: 75px;
+        }
+
+        .navbar-brand img {
+          width: 90px;
+          height: 35px;
+        }
+
+        .footer {
+          position: fixed;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          background-color: grey;
+          color: white;
+          text-align: center;
+        }
+
+        .container-fluid {
+          width: 1024px;
+        }
+
+        /* Minimum resolution */
+        @media (max-width: 1024px) {
+          .container-fluid {
+            width: 1024px;
+          }
+  
+          .content {
+            width: 500px;
+            position: relative;
+            left: 20%;
+          }
+        }
+
+
 
     </style>
     <title></title>
 </head>
 <body>
+@if(!empty($orderOpened))
+<script>
+      console.log('Pedido aberto com sucesso!');
+      $.alert('<center><div id="orderNotification"><img src="{{ asset('assets/images/confirmed_1.png') }}"></img></div><h3>Pedido aberto com sucesso!</h3></center>');
+  </script>
+@endif
+
+@if(!empty($orderNotOpened))
+<script>
+      console.log('Pedido do dia não encontrado!');
+      $.alert('<center><div id="orderNotification"><img src="{{ asset('assets/images/exclamation.png') }}"></img></div><h3>'+employeeName+' já pediu!<br/></h3>Pedido do dia não encontrado!.</center>');
+  </script>
+@endif
 
 <div class="container-fluid">
     <div class="navbar-header">
-      <p class="navbar-brand"><a href="/home">Marmitex</a></p>
+      <p class="navbar-brand"><a href="/home"><img src="{{ asset('assets/images/kota_sample.png')}}"></a></p>
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="/app/cardapio">Cardápio</a></li>
@@ -68,9 +120,9 @@
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="/app/cobranca">Cobrança</a></li>
-          <li><a href="#">Consultar Pedidos Anteriores</a></li>
+          <li><a href="/app/consulta_pedido">Consultar Pedidos Anteriores</a></li>
           <li><a href="#">Etiquetas do Dia</a></li>
-          <li><a href="#">Abrir Último pedido</a></li>
+          <li><a href="/app/pedido/abrir">Abrir Pedido do Dia</a></li>
         </ul>
       </li>
       <li class="dropdown">
@@ -157,6 +209,8 @@
     return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
   }
 </script>
-
+<footer class="footer">
+  <p>Esta aplicação só pode ser acessado na intranet da Kota Kota. A execução em outras estações sem autorização não é permitida!</p>
+</footer>
 </body>
 </html>

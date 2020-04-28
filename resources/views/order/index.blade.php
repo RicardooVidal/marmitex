@@ -116,11 +116,6 @@
         position: relative;
     }
 
-    #orderNotification img {
-        width: 75px;
-        height: 75px;
-    }
-
     #observationBlocked {
         display: none;
     }

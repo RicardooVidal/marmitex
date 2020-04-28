@@ -275,18 +275,56 @@ class OrderController extends Controller
     {
         $orders = Order::where('data', '=', date("Y-m-d"))->get(); 
         $menu = Menu::find(1)->toArray();
+        $employees = Employee::all();
 
-        // return response()->json([
-        //     'hasOrder' => 1,
-        //   ]);
-        $zebra = app('App\Http\Controllers\ZebraPrinterController');
-        $zebra->print("ZDesigner TLP 2844","Example.pdf");
-        //var_dump($orders);
-        die();
+        $tags = " ".'\n';
+        $tags = "@ prow()+1,00 say 'N'\n";
+        $tags .= "@ prow()+1,00 say 'R01,01'\n";
+        $tags .= "@ prow()+1,00 say 'S3'\n";
 
-        // if () {
+        foreach ($orders as $o) {
+            $tags .= "@ prow()+1,00 say 'A010,10,0,3,2,1,N,"."'".'"'."+alltrim('".trim($employees[$o->func_id]->nome)."')+".'"'."\n";
+            $tags .= "@ prow()+1,00 say 'A010,50,0,3,1,1,N,"."'".'"'."+alltrim('".trim($o->prato)."')+".'"'."\n";
 
-        // }
+            $tags .= "@ prow()+1,00 say 'A460,10,0,3,2,1,N,"."'".'"'."+alltrim('".trim($employees[$o->func_id]->nome)."')+".'"'."\n";
+            $tags .= "@ prow()+1,00 say 'A460,50,0,3,1,1,N,"."'".'"'."+alltrim('".trim($o->prato)."')+".'"'."\n";
+
+            $tags .= "@ prow()+1,00 say 'A460,100,0,3,1,1,N,"."'".'"'."+alltrim('".trim($o->observacao)."')+".'"'."\n";
+            $tags .= "@ prow()+1,00 say 'A460,120,0,3,1,1,N,"."'".'"'."+dtoc('".date("d-m-Y", strtotime($o->data))."')+".'"'."\n";
+            $tags .= "@ prow()+1,00 say 'A460,140,0,3,1,1,N,"."'".'"'."+alltrim('".trim(" ")."')+".'"'."\n";
+
+            $tags .= "@ prow()+1,00 say 'A010,100,0,3,1,1,N,"."'".'"'."+alltrim('".trim($o->observacao)."')+".'"'."\n";
+            $tags .= "@ prow()+1,00 say 'A010,120,0,3,1,1,N,"."'".'"'."+dtoc('".date("d-m-Y", strtotime($o->data))."')+".'"'."\n";
+            $tags .= "@ prow()+1,00 say 'A010,140,0,3,1,1,N,"."'".'"'."+alltrim('".trim(" ").'"'."')+"."\n";
+
+        }
+
+        $tags .= "@ prow()+1,00 say 'P1,1'\n";
+
+        // Txt foi gerado
+        if (\App\Helpers\AppHelper::instance()->generateTxt('etiqueta',$tags)) {
+            shell_exec("tags_api.exe");
+            return redirect()->back()->with('orders', $orders)->with('menu',$menu)->with('employees',$employees);
+        } else {
+            return redirect()->back()->with('orders', $orders)->with('menu',$menu)->with('employees',$employees);
+        }
+    }
+
+    public function openLastOrder() 
+    {
+        $today = date("Y-m-d");
+        $menu = Menu::where('data', '=', $today)->get(); 
+
+        foreach ($menu as $m) {
+            $m->fechado = 0;
+            $m->save();
+        }
+
+        if (count($menu) == 0) {
+            return view('home')->with('orderNotOpened', 'Pedido do dia não encontrado.');
+        }
+
+        return view('home')->with('orderOpened', 'Pedido aberto com sucesso.');
     }
 
 }
