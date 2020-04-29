@@ -67,6 +67,7 @@ Route::get('/app/pedido/visualizar', 'OrderController@view')->name('order.view')
 Route::post('/app/pedido/gerar', 'OrderController@generateOrder')->name('order.generate');
 Route::get('/app/pedido/etiquetas', 'OrderController@generateTags')->name('order.tags');
 Route::get('/app/pedido/abrir', 'OrderController@openLastOrder')->name('order.open');
+Route::get('/app/pedido/fechar', 'OrderController@closeOrder')->name('order.close');
 
 /* Cobrança */
 

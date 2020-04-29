@@ -26,6 +26,14 @@ class ConfigController extends Controller
 
     public function index()
     {
+        $config = Config::all()->toArray();
+        if (count($config) == 0 ) {
+            $config = new Config([
+                'horario'   => '',
+                'mensagem'  => '',
+            ]);
+            $config->save();    
+        }
         $config = Config::find(1);
         return view('config.index', compact('config'));
     }

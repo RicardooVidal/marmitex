@@ -181,6 +181,14 @@
         <div id="viewOrder" class="alert alert-info">
             <strong><a href="/app/pedido/visualizar">CLIQUE AQUI PARA VISUALIZAR O PEDIDO DO DIA</a></strong>
         </div>
+        <br/>
+        @if (Route::has('login'))
+            @auth
+            <div id="viewOrder" class="alert alert-danger">
+                <strong><a href="/app/pedido/fechar">CLIQUE AQUI PARA FECHAR O PEDIDO</a></strong>
+            </div>
+            @endif
+        @endif
         <div id="orderContainer">
             <div id="mealsContainer">
                 <div class="alert alert-info">

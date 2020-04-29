@@ -28,11 +28,16 @@ class OrderController extends Controller
         $res_id = 0;
         foreach ($menu as $m) {
             $res_id = $m->res_id;
+            $fechado = $m->fechado;
+        }
+        if ($fechado == 1) {
+            return view('home')->with('orderClosed', 'Pedido fechado com sucesso.');
         }
         $menu = Menu::find(1)->toArray();
         $employees = Employee::all()->sortBy('nome')->toArray();
         $restaurantDefault = Restaurant::find($res_id)->toArray();
         $config = Config::find(1)->toArray();
+    
         return view('order.index')->with('restaurantDefault', $restaurantDefault)->with('menu', $menu)->with('employees', $employees)->with('config', $config);
     }
 
@@ -312,19 +317,42 @@ class OrderController extends Controller
 
     public function openLastOrder() 
     {
+
+        $this->middleware('auth');
+
+        if (\Auth::user()) {
+
+            $today = date("Y-m-d");
+            $menu = Menu::where('data', '=', $today)->get(); 
+
+            foreach ($menu as $m) {
+                $m->fechado = 0;
+                $m->save();
+            }
+
+            if (count($menu) == 0) {
+                return view('home')->with('orderNotOpened', 'Pedido do dia não encontrado.');
+            }
+
+            return view('home')->with('orderOpened', 'Pedido aberto com sucesso.');
+        }
+
+        return view('home');
+
+        
+    }
+
+    public function closeOrder() {
         $today = date("Y-m-d");
         $menu = Menu::where('data', '=', $today)->get(); 
 
         foreach ($menu as $m) {
-            $m->fechado = 0;
+            $m->fechado = 1;
             $m->save();
         }
 
-        if (count($menu) == 0) {
-            return view('home')->with('orderNotOpened', 'Pedido do dia não encontrado.');
-        }
+        return view('home')->with('orderClosed', 'Pedido fechado com sucesso.');
 
-        return view('home')->with('orderOpened', 'Pedido aberto com sucesso.');
     }
 
 }

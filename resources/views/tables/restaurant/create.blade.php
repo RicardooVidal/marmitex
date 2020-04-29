@@ -36,9 +36,9 @@
                 <label for="valor">Valor Marmitex:</label>
                 <input type="text"  class="form-control" id="fvalor" name="valor" placeholder="Valor" value="{{old('valor')}}" >
                 <label for="frete">Frete:</label>
-                <input type="frete" class="form-control" id="ffrete" name="frete" placeholder="Frete" value="{{old('frete')}}">
+                <input type="frete" class="form-control" id="ffrete" name="frete" placeholder="Frete" value="0">
                 <label for="frete">Adicional:</label>
-                <input type="adicional" class="form-control" id="fadicional" name="adicional" placeholder="Adicional" value="{{old('adicional')}}">
+                <input type="adicional" class="form-control" id="fadicional" name="adicional" placeholder="Adicional" value="0">
                 <label for="responsavel">Responsável:</label>
                 <input type="text"  class="form-control" id="ffresponsavel" name="responsavel" placeholder="Responsável" value="{{old('responsavel')}}" >
                 <input type="checkbox" id="chfrete" name="chfrete" value = 1>

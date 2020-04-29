@@ -1,12 +1,11 @@
 Copie e cole o seguinte texto para o responsavel do Restaurante:
 
   Bom Dia, segue o pedido:
-    1 FILE DE FRANGO EMPANADO
 
-  Total: 1 Marmitex
-  Frete: 3,75
-  1 Refrigerante 2L Valor: 5,75
-  Valor total: 20,00
+  Total: 0 Marmitex
+  Frete: 13,00
+  1 Refrigerante 2L Valor: 0,00
+  Valor total: 13,00
   Troco p/: 0
   Observação: 
   Obrigado

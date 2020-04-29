@@ -101,6 +101,13 @@
   </script>
 @endif
 
+@if(!empty($orderClosed))
+<script>
+      console.log('Pedido fechado!');
+      $.alert('<center><div id="orderNotification"><img src="{{ asset('assets/images/exclamation.png') }}"></img></div><h3>Pedido fechado!</h3></center>');
+  </script>
+@endif
+
 @if(!empty($orderNotOpened))
 <script>
       console.log('Pedido do dia não encontrado!');
@@ -210,7 +217,7 @@
   }
 </script>
 <footer class="footer">
-  <p>Esta aplicação só pode ser acessado na intranet da Kota Kota. A execução em outras estações sem autorização não é permitida!</p>
+  <p>Esta aplicação só pode ser acessado na intranet da Kota Kota. A execução em outras estações sem autorização não é permitida! - Contato: contato@ricardovidal.xyz</p>
 </footer>
 </body>
 </html>

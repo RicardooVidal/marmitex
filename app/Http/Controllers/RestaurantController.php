@@ -158,9 +158,13 @@ class RestaurantController extends Controller
         return view('tables.restaurant')->with('restaurants', $restaurants)->with('success', 'Restaurante excluído com Sucesso.');
     }
 
-    // Verifica restaurante padr�o
+    // Verifica restaurante padrão
     public function verificaPadrao($padrao, $id)
     {
+        $restaurants = Restaurant::all()->toArray();
+        if (count($restaurants) == 0 ) {
+            return;
+        }
         $restaurants = Restaurant::where('padrao', '=', '1')->get();
         if ($padrao == 1) {
             foreach ($restaurants as $restaurant) {

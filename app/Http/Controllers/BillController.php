@@ -110,10 +110,7 @@ class BillController extends Controller
 
         $content = $request['code'];
         \App\Helpers\AppHelper::instance()->generateHtml2PDF('cobranca',$content);
-<<<<<<< HEAD
-=======
 
         shell_exec("wkhtmltopdf cobranca.html cobranca.pdf");
->>>>>>> cardapio
     }
 }

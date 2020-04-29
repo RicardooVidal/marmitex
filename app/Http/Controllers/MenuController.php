@@ -19,6 +19,31 @@ class MenuController extends Controller
      */
     public function __construct()
     {
+        $menu = Menu::all()->toArray();
+        if (count($menu) == 0 ) {
+            $menu = new Menu([
+                'res_id'   => 1,
+                'p1'       => '',
+                'p2'       => '',
+                'p3'       => '',
+                'p4'       => '',
+                'p5'       => '',
+                'p6'       => '',
+                'p7'       => '',
+                'p8'       => '',
+                'pr1'      => 0,
+                'pr2'      => 0,
+                'pr3'      => 0,
+                'pr4'      => 0,
+                'pr5'      => 0,
+                'pr6'      => 0,
+                'pr7'      => 0,
+                'pr8'      => 0,
+                'fechado'     => 0,
+                'data'     => date("Y-m-d")
+            ]);
+            $menu->save();    
+        }
         $this->middleware('auth');
     }
 
@@ -38,7 +63,6 @@ class MenuController extends Controller
         if(!$this->verificaPedido($id)) {
             $this->cardapioDoDia();
             $menu = Menu::find(1);
-            echo $menu->res_id;
             $restaurantDefault = Restaurant::find($menu->res_id)->toArray();
             return view('menu.index')->with('restaurantDefault', $restaurantDefault)->with('menu', $menu);
         }
