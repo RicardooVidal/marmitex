@@ -319,7 +319,7 @@ class OrderController extends Controller
 
         // Txt foi gerado
         if (\App\Helpers\AppHelper::instance()->generateTxt('etiqueta',$tags)) {
-            shell_exec("tags_api.exe");
+            \App\Helpers\AppHelper::instance()->openExternalSite('https://10.0.1.187/zebra_tags_api/run.php');
             return redirect()->back()->with('orders', $orders)->with('menu',$menu)->with('employees',$employees);
         } else {
             return redirect()->back()->with('orders', $orders)->with('menu',$menu)->with('employees',$employees);
