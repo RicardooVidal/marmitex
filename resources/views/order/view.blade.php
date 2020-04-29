@@ -29,6 +29,11 @@
         <div id="btnDoOrder"><button type="button" CLASS="btn btn-primary" data-toggle="modal" data-target="#modalGenerateOrder">Gerar Pedido</button></div>
         <div id="btnEtiquetitas"><a class='btn btn-primary' href="/app/pedido/etiquetas">Etiquetas</a></div>
     </div>
+    @if(!empty(\Session::get('hasNoOrders')))
+        <div class="alert alert-warning" role="warning">
+            <p>Não há pedido para ser gerado!</p>
+        </div>
+    @endif
     @if(!empty(\Session::get('deleted')))
         <div class="alert alert-success" role="deleted">
             <p>Pedido excluído com sucesso</p>

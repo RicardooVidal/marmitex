@@ -85,6 +85,17 @@ class OrderController extends Controller
             
             $quantidade = 0;
             $orders = Order::where('data', '=', date("Y-m-d"))->get();
+            if (count($orders) == 0 ) {
+                $menu = Menu::find(1)->get();
+                $res_id = 0;
+                foreach ($menu as $m) {
+                    $res_id = $m->res_id;
+                }
+                $employees = Employee::all();
+                $restaurantDefault = Restaurant::find($res_id)->toArray();
+                $orders = Order::where('data', '=', date("Y-m-d"))->get();
+                return redirect()->back()->with('orders', $orders)->with('menu',$menu)->with('employees',$employees)->with('restaurantDefault',$restaurantDefault)->with('hasNoOrders',['Não há pedido para ser gerado!.']);
+            }
             $menu = Menu::find(1)->toArray();
 
             $adicional     = $request->get('valor');
@@ -288,10 +299,10 @@ class OrderController extends Controller
         $tags .= "@ prow()+1,00 say 'S3'\n";
 
         foreach ($orders as $o) {
-            $tags .= "@ prow()+1,00 say 'A010,10,0,3,2,1,N,"."'".'"'."+alltrim('".trim($employees[$o->func_id]->nome)."')+".'"'."\n";
+            $tags .= "@ prow()+1,00 say 'A010,10,0,3,2,1,N,"."'".'"'."+alltrim('".trim($employees[$o->func_id-1]->nome)."')+".'"'."\n";
             $tags .= "@ prow()+1,00 say 'A010,50,0,3,1,1,N,"."'".'"'."+alltrim('".trim($o->prato)."')+".'"'."\n";
 
-            $tags .= "@ prow()+1,00 say 'A460,10,0,3,2,1,N,"."'".'"'."+alltrim('".trim($employees[$o->func_id]->nome)."')+".'"'."\n";
+            $tags .= "@ prow()+1,00 say 'A460,10,0,3,2,1,N,"."'".'"'."+alltrim('".trim($employees[$o->func_id-1]->nome)."')+".'"'."\n";
             $tags .= "@ prow()+1,00 say 'A460,50,0,3,1,1,N,"."'".'"'."+alltrim('".trim($o->prato)."')+".'"'."\n";
 
             $tags .= "@ prow()+1,00 say 'A460,100,0,3,1,1,N,"."'".'"'."+alltrim('".trim($o->observacao)."')+".'"'."\n";
