@@ -210,6 +210,10 @@
                             <form id="billGenerateForm" action="/app/cobranca/gerar" method="POST">
                                 {{csrf_field()}} 
                                 <input type="hidden" id="billCode" name="code">
+                                <input type="hidden" id="ffuncionario" name="funcionario" value="{{$funcionario}}">
+                                <input type="hidden" id="fbaixado" name="baixado">
+                                <input type="hidden" id="fdata_inicial" name="data_inicial" value="{{$data_inicial}}">
+                                <input type="hidden" id="fdata_final" name="data_final" value="{{$data_final}}">
                                 <button class="btn btn-primary" form="billGenerateForm">Gerar cobrança</button>
                             </form>
                             <button type="button" class="btn btn-white" data-dismiss="modal">Fechar</button>

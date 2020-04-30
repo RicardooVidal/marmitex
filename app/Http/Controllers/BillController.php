@@ -94,11 +94,14 @@ class BillController extends Controller
         $data_final    = $request->get('data_final');
         $funcionario   = $request->get('funcionario');
         $gerado        = $request->get('chgerado');
+        $employees = Employee::all();
 
         if ($gerado == 0) {
             if ($funcionario == 0) {
+                $name = 'TODOS-'.date("Y-m-d");
                 $orders = Order::where('situacao','=', 0)->whereBetween('data',[$data_inicial,$data_final])->get();
             } else {
+                $name = $employees[$funcionario-1]->nome.'-'.date("d-m-Y");
                 $orders = Order::where('situacao','=', 0)->where('func_id','=', $funcionario)->whereBetween('data',[$data_inicial,$data_final])->get();
             }
         }
@@ -110,7 +113,6 @@ class BillController extends Controller
 
         $content = $request['code'];
         \App\Helpers\AppHelper::instance()->generateHtml2PDF('cobranca',$content);
-
-        shell_exec("wkhtmltopdf cobranca.html cobranca.pdf");
+        shell_exec("wkhtmltopdf cobranca.html cobrancas/".trim($name).".pdf");
     }
 }

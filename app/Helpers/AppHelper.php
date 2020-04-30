@@ -30,9 +30,10 @@ class AppHelper
 
     public function generateHtml2PDF($name, $value)
     {
+        echo $name;
+        echo $value;
         $fp = fopen($_SERVER['DOCUMENT_ROOT'] . "/".$name.".html","wb");
         $value = $this->removeAcentuacao(utf8_decode($value));
-
         fwrite($fp,$value);
         fclose($fp);
         $file = fopen("cobranca.html", "r") or die("Unable to open file!");
@@ -53,7 +54,6 @@ class AppHelper
     }
 
     public function openExternalSite($address) {
-        $curl_handle=curl_init();
         $url = $address;
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
