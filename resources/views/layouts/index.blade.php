@@ -138,7 +138,7 @@
         <ul class="dropdown-menu">
           <li><a href="/app/tabelas">Tabelas</a></li>
           <li><a href="/app/configuracoes">Configurações</a></li>
-          <li><a href="#">Sobre</a></li>
+          <li><a data-toggle="modal" href="#modalAbout">Sobre</a></li>
         </ul>
       </li>
       <li>
@@ -163,6 +163,24 @@
     </ul>
   </div>
 </nav>
+
+<!-- Modal -->
+<div class="modal fade" id="modalAbout" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h2 class="modal-title">Ver. 20200430-0027</h2>
+        <p>Desenvolvido para uso interno. Esta aplicação não pode ser vendida, copiada ou distribuída.</p>
+        <p>E-mail: contato@ricardovidal.xyz</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 
 <div class="content">
     @yield('content')

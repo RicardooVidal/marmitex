@@ -1,11 +1,12 @@
 Copie e cole o seguinte texto para o responsavel do Restaurante:
 
   Bom Dia, segue o pedido:
+    1 TESTE
 
-  Total: 0 Marmitex
+  Total: 1 Marmitex
   Frete: 13,00
   1 Refrigerante 2L Valor: 0,00
-  Valor total: 13,00
+  Valor total: 25,00
   Troco p/: 0
   Observação: 
   Obrigado

@@ -50,7 +50,7 @@ class AppHelper
 
     public function removeAcentuacao($word): string
     {
-        return strtr($word,'ΰαβγδηθικλμνξορςστυφωϊϋόύÿΐΑΒΓΔΗΘΙΚΛΜΝΞΟΡÒΣΤΥΦΩΪΫάέ','aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY'); 
+        return strtr($word,'Γ Γ΅ΓΆΓ£Γ¤Γ§Γ¨Γ©ΓªΓ«Γ¬Γ­Γ®Γ―Γ±Γ²Γ³Γ΄ΓµΓ¶ΓΉΓΊΓ»ΓΌΓ½ΓΏΓ€ΓΓ‚ΓƒΓ„Γ‡ΓΓ‰ΓΓ‹ΓΓΓΓΓ‘Γ’Γ“Γ”Γ•Γ–Γ™ΓΓ›ΓΓ','aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY'); 
     }
 
     public function openExternalSite($address) {
