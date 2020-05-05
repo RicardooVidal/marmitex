@@ -31,6 +31,7 @@ class ConfigController extends Controller
             $config = new Config([
                 'horario'   => '',
                 'mensagem'  => '',
+                'zebra'  => '',
             ]);
             $config->save();    
         }
@@ -44,6 +45,7 @@ class ConfigController extends Controller
         $config = Config::find(1);
         $config->horario  = $request->get('horario');
         $config->mensagem = $request->get('mensagem');
+        $config->zebra = $request->get('zebra');
         $config->save();
 
         return view('config.index')->with('config', $config)->with('success', 'Dados atualizados com sucesso.');

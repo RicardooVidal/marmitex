@@ -292,34 +292,69 @@ class OrderController extends Controller
         $orders = Order::where('data', '=', date("Y-m-d"))->get(); 
         $menu = Menu::find(1)->toArray();
         $employees = Employee::all();
-
+        $config = Config::find(1)->get();
         $tags = " ".'\n';
-        $tags = "@ prow()+1,00 say 'N'\n";
-        $tags .= "@ prow()+1,00 say 'R01,01'\n";
-        $tags .= "@ prow()+1,00 say 'S3'\n";
+        $tags = "N\n";
+        $tags .= "R01,01\n";
+        $tags .= "S3\n";
 
         foreach ($orders as $o) {
-            $tags .= "@ prow()+1,00 say 'A010,10,0,3,2,1,N,"."'".'"'."+alltrim('".trim($employees[$o->func_id-1]->nome)."')+".'"'."\n";
-            $tags .= "@ prow()+1,00 say 'A010,50,0,3,1,1,N,"."'".'"'."+alltrim('".trim($o->prato)."')+".'"'."\n";
+            $tags .= "A010,10,0,3,2,1,N,".'"'.trim($employees[$o->func_id-1]->nome).'"'."\n";
+            $tags .= "A010,50,0,3,1,1,N,".'"'.trim($o->prato)."\n";
 
-            $tags .= "@ prow()+1,00 say 'A460,10,0,3,2,1,N,"."'".'"'."+alltrim('".trim($employees[$o->func_id-1]->nome)."')+".'"'."\n";
-            $tags .= "@ prow()+1,00 say 'A460,50,0,3,1,1,N,"."'".'"'."+alltrim('".trim($o->prato)."')+".'"'."\n";
+            $tags .= "A460,10,0,3,2,1,N,".'"'.trim($employees[$o->func_id-1]->nome).'"'."\n";
 
-            $tags .= "@ prow()+1,00 say 'A460,100,0,3,1,1,N,"."'".'"'."+alltrim('".trim($o->observacao)."')+".'"'."\n";
-            $tags .= "@ prow()+1,00 say 'A460,120,0,3,1,1,N,"."'".'"'."+dtoc('".date("d-m-Y", strtotime($o->data))."')+".'"'."\n";
-            $tags .= "@ prow()+1,00 say 'A460,140,0,3,1,1,N,"."'".'"'."+alltrim('".trim(" ")."')+".'"'."\n";
+            $tags .= "A460,50,0,3,1,1,N,".'"'.trim($o->prato).'"'."\n";
 
-            $tags .= "@ prow()+1,00 say 'A010,100,0,3,1,1,N,"."'".'"'."+alltrim('".trim($o->observacao)."')+".'"'."\n";
-            $tags .= "@ prow()+1,00 say 'A010,120,0,3,1,1,N,"."'".'"'."+dtoc('".date("d-m-Y", strtotime($o->data))."')+".'"'."\n";
-            $tags .= "@ prow()+1,00 say 'A010,140,0,3,1,1,N,"."'".'"'."+alltrim('".trim(" ").'"'."')+"."\n";
+            $tags .= "A460,100,0,3,1,1,N,".'"'.trim($o->observacao).'"'."\n";
+
+            $tags .= "A460,120,0,3,1,1,N,".'"'.date("d-m-Y", strtotime($o->data)).'"'."\n";
+
+            $tags .= "A460,140,0,3,1,1,N,".'"'."".'"'."\n";
+
+            $tags .= "A010,100,0,3,1,1,N,".'"'.trim($o->observacao).'"'."\n";
+
+            $tags .= "A010,120,0,3,1,1,N,".'"'.date("d-m-Y", strtotime($o->data)).'"'."\n";
+
+            $tags .= "A010,120,0,3,1,1,N,".'"'.date("d-m-Y", strtotime($o->data)).'"'."\n";
+
+            $tags .= "A010,140,0,3,1,1,N,".'"'."".'"'."\n";
 
         }
 
-        $tags .= "@ prow()+1,00 say 'P1,1'\n";
+        $tags .= "P1,1\n";
+
+        // $tags = "'N'\n";
+        // $tags .= "'R01,01'\n";
+        // $tags .= "'S3'\n";
+
+        // foreach ($orders as $o) {
+        //     $tags .= "'A010,10,0,3,2,1,N,".'"'."'"."+alltrim('".trim($employees[$o->func_id-1]->nome)."')+"."'".'"'."'"."\n";
+        //     $tags .= "'A010,50,0,3,1,1,N,".'"'."'"."+alltrim('".trim($o->prato)."')+"."'".'"'."'"."\n";
+
+        //     $tags .= "'A460,10,0,3,2,1,N,".'"'."'"."+alltrim('".trim($employees[$o->func_id-1]->nome)."')+"."'".'"'."'"."\n";
+
+        //     $tags .= "'A460,50,0,3,1,1,N,".'"'."'"."+alltrim('".trim($o->prato)."')+"."'".'"'."'"."\n";
+
+        //     $tags .= "'A460,100,0,3,1,1,N,".'"'."'"."+alltrim('".trim($o->observacao)."')+"."'".'"'."'"."\n";
+
+        //     $tags .= "'A460,120,0,3,1,1,N,".'"'."'"."+dtoc('".date("d-m-Y", strtotime($o->data))."')+"."'".'"'."'"."\n";
+
+        //     $tags .= "'A460,140,0,3,1,1,N,".'"'."'"."+alltrim('')+"."'".'"'."'"."\n";
+
+        //     $tags .= "'A010,100,0,3,1,1,N,".'"'."'"."+alltrim('".trim($o->observacao)."')+"."'".'"'."'"."\n";
+
+        //     $tags .= "'A010,120,0,3,1,1,N,".'"'."'"."+dtoc('".date("d-m-Y", strtotime($o->data))."')+"."'".'"'."'"."\n";
+
+        //     $tags .= "'A010,120,0,3,1,1,N,".'"'."'"."+dtoc('".date("d-m-Y", strtotime($o->data))."')+"."'".'"'."'"."\n";
+
+        // }
+
+        // $tags .= "'P1,1'\n";
 
         // Txt foi gerado
         if (\App\Helpers\AppHelper::instance()->generateTxt('etiqueta',$tags)) {
-            \App\Helpers\AppHelper::instance()->openExternalSite('http://10.0.1.187/zebra_tags_api/run.php');
+            \App\Helpers\AppHelper::instance()->openExternalSite($config[0]->zebra);
             return redirect()->back()->with('orders', $orders)->with('menu',$menu)->with('employees',$employees);
         } else {
             return redirect()->back()->with('orders', $orders)->with('menu',$menu)->with('employees',$employees);

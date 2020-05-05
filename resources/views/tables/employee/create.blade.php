@@ -31,9 +31,9 @@
                 <input type="radio" id="nao" name="bloqueado" value="2" checked>
                 <label for="bloqueio-nao">Não</label><br/>
                 <label for="nome">Pode preencher observação?:</label>
-                <input type="radio" id="sim" name="observacao" value="1">
+                <input type="radio" id="sim" name="observacao" value="1" checked>
                 <label for="observacao-sim">Sim</label>
-                <input type="radio" id="nao" name="observacao" value="2" checked>
+                <input type="radio" id="nao" name="observacao" value="2">
                 <label for="observacao-nao">Não</label><br/>  
                 <input type="submit" class="btn btn-primary" value="Inserir" value = 1>
             </div>

@@ -17,6 +17,7 @@ class CreateConfigsTable extends Migration
             $table->increments('id');
             $table->string('horario')->nullable();
             $table->string('mensagem')->nullable();
+            $table->string('zebra')->nullable();
             $table->string('licenca')->nullable();
             $table->timestamps();
         });
