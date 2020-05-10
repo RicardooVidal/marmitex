@@ -128,7 +128,7 @@
         <ul class="dropdown-menu">
           <li><a href="/app/cobranca">Cobrança</a></li>
           <li><a href="/app/consulta_pedido">Consultar Pedidos Anteriores</a></li>
-          <li><a href="#">Etiquetas do Dia</a></li>
+          <li><a href="/app/pedido/etiquetas">Etiquetas do Dia</a></li>
           <li><a href="/app/pedido/abrir">Abrir Pedido do Dia</a></li>
         </ul>
       </li>
@@ -235,7 +235,7 @@
   }
 </script>
 <footer class="footer">
-  <p>Esta aplicação só pode ser acessado na intranet da Kota Kota. A execução em outras estações sem autorização não é permitida! - Contato: contato@ricardovidal.xyz</p>
+  <p>Kota Kota | contato@ricardovidal.xyz</p>
 </footer>
 </body>
 </html>

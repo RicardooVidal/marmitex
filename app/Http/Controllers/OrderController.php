@@ -293,36 +293,30 @@ class OrderController extends Controller
         $menu = Menu::find(1)->toArray();
         $employees = Employee::all();
         $config = Config::find(1)->get();
-        $tags = " ".'\n';
-        $tags = "N\n";
-        $tags .= "R01,01\n";
-        $tags .= "S3\n";
-
+        $tags = '';
         foreach ($orders as $o) {
+            $tags .= " ".'\n';
+            $tags .= "N\n";
+            $tags .= "R01,01\n";
+            $tags .= "S3\n";
+
             $tags .= "A010,10,0,3,2,1,N,".'"'.trim($employees[$o->func_id-1]->nome).'"'."\n";
-            $tags .= "A010,50,0,3,1,1,N,".'"'.trim($o->prato)."\n";
+            $tags .= "A010,50,0,3,1,1,N,".'"'.trim($o->prato).'"'."\n";
 
             $tags .= "A460,10,0,3,2,1,N,".'"'.trim($employees[$o->func_id-1]->nome).'"'."\n";
-
             $tags .= "A460,50,0,3,1,1,N,".'"'.trim($o->prato).'"'."\n";
-
+            
             $tags .= "A460,100,0,3,1,1,N,".'"'.trim($o->observacao).'"'."\n";
-
             $tags .= "A460,120,0,3,1,1,N,".'"'.date("d-m-Y", strtotime($o->data)).'"'."\n";
-
             $tags .= "A460,140,0,3,1,1,N,".'"'."".'"'."\n";
-
+            
             $tags .= "A010,100,0,3,1,1,N,".'"'.trim($o->observacao).'"'."\n";
-
             $tags .= "A010,120,0,3,1,1,N,".'"'.date("d-m-Y", strtotime($o->data)).'"'."\n";
-
-            $tags .= "A010,120,0,3,1,1,N,".'"'.date("d-m-Y", strtotime($o->data)).'"'."\n";
-
             $tags .= "A010,140,0,3,1,1,N,".'"'."".'"'."\n";
 
-        }
+            $tags .= "P1,1\n";
 
-        $tags .= "P1,1\n";
+        }
 
         // $tags = "'N'\n";
         // $tags .= "'R01,01'\n";

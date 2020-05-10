@@ -25,6 +25,25 @@ class HomeController extends Controller
     {
         session_start();
         $_SESSION['globalMessage'] = 0;
+        if (!$this->checkPermission()) {
+            return view ('permission');
+            die();
+        }
         return view('home');
+    }
+
+    public function checkPermission(): bool
+    {
+        ini_set('display_errors', 'On');
+        $url = "http://ricardovidal.xyz/licencas/marmitex/marmitex.json";
+        $json = file_get_contents($url);
+        $json_data = json_decode($json, true);
+        $use = $json_data['marmitex']['use'];
+
+        if ($use == 'no') {
+            return false;
+        }
+
+        return true;
     }
 }
