@@ -26,8 +26,8 @@
                     @foreach($orders as $order)
                         <tr class="order">
                             @if ($order->func_id == $employee->id)
-                                <td id="name">{{$employees[$order->func_id-1]->nome.' '.$employees[$order->func_id-1]->sobrenome}}</td>
-                                <td id="restaurant">{{$restaurant[$order->res_id-1]->nome}}</td>
+                                <td id="name">{{\App\Helpers\AppHelper::getEmployeeName($order->func_id).' '.\App\Helpers\AppHelper::getEmployeeSurname($order->func_id)}}</td>
+                                <td id="restaurant">{{\App\Helpers\AppHelper::getRestaurantName($order->res_id)}}</td>
                                 <td id="meal">{{$order->prato}}</td>
                                 <td id="observation">{{$order->observacao}}</td>
                                 <td class="priceDiscount">{{$order->valor_desconto}}</td>
@@ -64,7 +64,7 @@
                     $frete = 0;
                     $valor = 0;
                 ?>
-                <td><h3><strong><Nome:</strong> {{$employees[$funcionario-1]->nome.' '.$employees[$funcionario-1]->sobrenome}}</h3></td>
+                <td><h3><strong><Nome:</strong> {{\App\Helpers\AppHelper::getEmployeeName($funcionario).' '.\App\Helpers\AppHelper::getEmployeeSurname($funcionario)}}</h3></td>
                 <tr>
                     <th>Nome</th>
                     <th>Restaurante</th>
@@ -77,8 +77,8 @@
                 </tr>
                 @foreach($orders as $order)
                     <tr class="order">
-                        <td id="name">{{$employees[$funcionario-1]->nome.' '.$employees[$funcionario-1]->sobrenome}}</td>
-                        <td id="restaurant">{{$restaurant[$order->res_id-1]->nome}}</td>
+                        <td id="name">{{\App\Helpers\AppHelper::getEmployeeName($order->func_id).' '.\App\Helpers\AppHelper::getEmployeeSurname($order->func_id)}}</td>
+                        <td id="restaurant">{{\App\Helpers\AppHelper::getRestaurantName($order->res_id)}}</td>
                         <td id="meal">{{$order->prato}}</td>
                         <td id="observation">{{$order->observacao}}</td>
                         <td class="priceDiscount">{{$order->valor_desconto}}</td>

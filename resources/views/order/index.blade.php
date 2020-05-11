@@ -303,7 +303,7 @@
         $(document).keyup(function(e) {
             if (e.keyCode === 27) cancelOrder();   // esc
             if (e.keyCode === 13) confirmOrder(); // enter
-            if (e.keyCode === 86) viewOrder(); // enter
+            //if (e.keyCode === 86) viewOrder(); // enter
         });
 
         function inicializaVariaveis() {
@@ -479,32 +479,6 @@
             $("#mealsContainer a").css({"pointer-events": "none", "opacity": "0.5"});
             $("#observationContainer").css({"visibility": "hidden"});
             $("#noticeOrder").text('Selecione um nome e em seguida clique no prato.');
-        }
-
-        function viewOrder() {
-            $.confirm({
-                content: function(){
-                    var self = this;
-                    self.setContent('Checking callback flow');
-                    return $.ajax({
-                        url: 'bower.json',
-                        dataType: 'json',
-                        method: 'get'
-                    }).done(function (response) {
-                        self.setContentAppend('<div>Done!</div>');
-                    }).fail(function(){
-                        self.setContentAppend('<div>Fail!</div>');
-                    }).always(function(){
-                        self.setContentAppend('<div>Always!</div>');
-                    });
-                },
-                contentLoaded: function(data, status, xhr){
-                    self.setContentAppend('<div>Content loaded!</div>');
-                },
-                onContentReady: function(){
-                    this.setContentAppend('<div>Content ready!</div>');
-                }
-            });
         }
 
         </script>

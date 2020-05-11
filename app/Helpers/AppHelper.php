@@ -1,5 +1,7 @@
 <?php
 namespace App\Helpers;
+use App\Employee;
+use App\Restaurant;
 class AppHelper
 {
 
@@ -60,5 +62,33 @@ class AppHelper
         $data = curl_exec($curl);
         curl_close($curl);
     
+    }
+
+
+    static function getEmployeeName($id) 
+    {
+        $employee = Employee::where('id', $id)->get();
+        foreach($employee as $e) {
+            $name = $e->nome;
+        }
+        return $name;
+    }
+
+    static function getEmployeeSurname($id) 
+    {
+        $employee = Employee::where('id', $id)->get();
+        foreach($employee as $e) {
+            $surname = $e->sobrenome;
+        }
+        return $surname;
+    }
+
+    static function getRestaurantName($id) 
+    {
+        $restaurant = Restaurant::where('id', $id)->get();
+        foreach($restaurant as $r) {
+            $nome = $r->nome;
+        }
+        return $nome;
     }
 }

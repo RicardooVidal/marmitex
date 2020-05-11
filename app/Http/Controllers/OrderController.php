@@ -196,7 +196,7 @@ class OrderController extends Controller
     public function view() 
     {
         $menu = Menu::find(1)->get();
-        $employees = Employee::all();
+        $employees = Employee::all()->toArray();
         foreach ($menu as $m) {
             $res_id = $m->res_id;
         }
@@ -329,10 +329,10 @@ class OrderController extends Controller
             $tags .= "R01,01\n";
             $tags .= "S3\n";
 
-            $tags .= "A010,10,0,3,2,1,N,".'"'.trim($employees[$o->func_id-1]->nome).'"'."\n";
+            $tags .= "A010,10,0,3,2,1,N,".'"'.trim(\App\Helpers\AppHelper::getEmployeeName($o->func_id)).'"'."\n";
             $tags .= "A010,50,0,3,1,1,N,".'"'.trim($o->prato).'"'."\n";
 
-            $tags .= "A460,10,0,3,2,1,N,".'"'.trim($employees[$o->func_id-1]->nome).'"'."\n";
+            $tags .= "A460,10,0,3,2,1,N,".'"'.trim(\App\Helpers\AppHelper::getEmployeeName($o->func_id)).'"'."\n";
             $tags .= "A460,50,0,3,1,1,N,".'"'.trim($o->prato).'"'."\n";
             
             $tags .= "A460,100,0,3,1,1,N,".'"'.trim($o->observacao).'"'."\n";

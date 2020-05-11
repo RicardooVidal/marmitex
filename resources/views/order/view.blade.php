@@ -73,7 +73,7 @@
             @foreach($orders as $order)
                 <tr class="order">
                     <td id="id"><strong>{{$order->id}}</strong></td>
-                    <td id="name">{{$employees[$order->func_id-1]->nome.' '.$employees[$order->func_id-1]->sobrenome}}</td>
+                    <td id="name">{{\App\Helpers\AppHelper::getEmployeeName($order->func_id).' '.\App\Helpers\AppHelper::getEmployeeSurname($order->func_id)}}</td>
                     <td id="meal">{{$order->prato}}</td>
                     <td id="observation">{{substr($order->observacao,0, 55)}}</td>
                     <td class="price">{{$order->valor}}</td>

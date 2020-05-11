@@ -101,7 +101,7 @@ class BillController extends Controller
                 $name = 'TODOS-'.date("Y-m-d");
                 $orders = Order::where('situacao','=', 0)->whereBetween('data',[$data_inicial,$data_final])->get();
             } else {
-                $name = $employees[$funcionario-1]->nome.'-'.date("d-m-Y");
+                $name = \App\Helpers\AppHelper::getEmployeeName($funcionario).'-'.date("d-m-Y");
                 $orders = Order::where('situacao','=', 0)->where('func_id','=', $funcionario)->whereBetween('data',[$data_inicial,$data_final])->get();
             }
         }

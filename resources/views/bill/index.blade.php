@@ -93,8 +93,8 @@
                                                 @foreach($orders as $order)
                                                     <tr class="order">
                                                         @if ($order->func_id == $employee->id)
-                                                            <td id="name">{{$employees[$order->func_id-1]->nome.' '.substr($employees[$order->func_id-1]->sobrenome, 0,10)}}</td>
-                                                            <td id="restaurant">{{$restaurant[$order->res_id-1]->nome}}</td>
+                                                            <td id="name">{{\App\Helpers\AppHelper::getEmployeeName($order->func_id).' '.substr(\App\Helpers\AppHelper::getEmployeeSurname($order->func_id), 0,10)}}</td>
+                                                            <td id="restaurant">{{\App\Helpers\AppHelper::getRestaurantName($order->res_id)}}</td>
                                                             <td id="meal">{{$order->prato}}</td>
                                                             <td id="observation">{{substr($order->observacao, 0, 15)}}</td>
                                                             <td class="priceDiscount right_money">{{$order->valor_desconto}}</td>
@@ -155,7 +155,7 @@
                             <h3 class="modal-title"><strong>Período: {{date("d-m-Y", strtotime($data_inicial))}} até {{date("d-m-Y", strtotime($data_final))}} </strong></h3>
                         </div>
                         <div id="billDiv" class="modal-body">
-                            <h3><strong><Nome:</strong> {{$employees[$funcionario-1]->nome.' '.$employees[$funcionario-1]->sobrenome}} </h3> 
+                            <h3><strong><Nome:</strong> {{\App\Helpers\AppHelper::getEmployeeName($funcionario).' '.\App\Helpers\AppHelper::getEmployeesSurname($funcionario)}} </h3> 
                             <p>Período: {{date("d-m-Y", strtotime($data_inicial))}} até {{date("d-m-Y", strtotime($data_final))}} </p>
                             <table id="billTable" class="table">
                                 <?php 
@@ -178,8 +178,8 @@
                                 </tr>
                                 @foreach($orders as $order)
                                     <tr class="order">
-                                    <td id="name">{{$employees[$order->func_id-1]->nome.' '.substr($employees[$order->func_id-1]->sobrenome, 0,10)}}</td>
-                                        <td id="restaurant">{{$restaurant[$order->res_id-1]->nome}}</td>
+                                    <td id="name">{{\App\Helpers\AppHelper::getEmployeeName($order->func_id).' '.substr(\App\Helpers\AppHelper::getEmployeeSurname($order->func_id), 0,10)}}</td>
+                                        <td id="restaurant">{{\App\Helpers\AppHelper::getRestaurantName($order->res_id)}}</td>
                                         <td id="meal">{{$order->prato}}</td>
                                         <td id="observation">{{substr($order->observacao, 0, 15)}}</td>
                                         <td class="priceDiscount right_money">{{$order->valor_desconto}}</td>
@@ -211,7 +211,7 @@
                                 <p>&nbsp;</p>
                                 <p>____________________________________________</p>
                                 <p></p>
-                                <p>{{$employees[$order->func_id-1]->nome.' '.$employees[$order->func_id-1]->sobrenome}}</p>
+                                <p>{{\App\Helpers\AppHelper::getEmployeeName($order->func_id).' '.\App\Helpers\AppHelper::getEmployeeSurname($order->func_id)}}</p>
                             </div>
                         </div>
                         <div class="modal-footer">
