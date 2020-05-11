@@ -61,15 +61,15 @@ class BillController extends Controller
 
         if ($funcionario == 0) {
             if ($gerado == 1) {
-                $orders = Order::where('situacao','=', 1)->whereBetween('data',[$data_inicial,$data_final])->get();
+                $orders = Order::where('situacao','=', 1)->where('quantidade','>=',1)->whereBetween('data',[$data_inicial,$data_final])->get();
             } else {
-                $orders = Order::where('situacao','=', 0)->whereBetween('data',[$data_inicial,$data_final])->get();
+                $orders = Order::where('situacao','=', 0)->where('quantidade','>=',1)->whereBetween('data',[$data_inicial,$data_final])->get();
             }
         } else {
             if ($gerado == 1) {
-                $orders = Order::where('situacao','=', 1)->where('func_id','=', $funcionario)->whereBetween('data',[$data_inicial,$data_final])->get();
+                $orders = Order::where('situacao','=', 1)->where('quantidade','>=',1)->where('func_id','=', $funcionario)->whereBetween('data',[$data_inicial,$data_final])->get();
             } else {
-                $orders = Order::where('situacao','=', 0)->where('func_id','=', $funcionario)->whereBetween('data',[$data_inicial,$data_final])->get();
+                $orders = Order::where('situacao','=', 0)->where('quantidade','>=',1)->where('func_id','=', $funcionario)->whereBetween('data',[$data_inicial,$data_final])->get();
             }
         }
 
@@ -114,5 +114,9 @@ class BillController extends Controller
         $content = $request['code'];
         \App\Helpers\AppHelper::instance()->generateHtml2PDF('cobranca',$content);
         shell_exec("wkhtmltopdf cobranca.html cobrancas/".trim($name).".pdf");
+        $employees = Employee::all()->toArray();
+        $orders = array();
+        return view('bill.index')->with('employees',$employees)->with('orders', $orders);
+
     }
 }

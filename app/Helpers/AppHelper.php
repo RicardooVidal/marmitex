@@ -30,8 +30,6 @@ class AppHelper
 
     public function generateHtml2PDF($name, $value)
     {
-        echo $name;
-        echo $value;
         $fp = fopen($_SERVER['DOCUMENT_ROOT'] . "/".$name.".html","wb");
         $value = $this->removeAcentuacao(utf8_decode($value));
         fwrite($fp,$value);

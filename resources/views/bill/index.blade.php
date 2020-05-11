@@ -64,64 +64,72 @@
                             </div>
                             <div id="billDiv" class="modal-body">
                                     @foreach($employees as $employee)
-                                        <div class="page-break"><h3><strong><Nome:</strong> {{$employee->nome.' '.$employee->sobrenome}}</h3> <p> Período: {{date("d-m-Y", strtotime($data_inicial))}} até {{date("d-m-Y", strtotime($data_final))}}</p></div><br/><br/><br/>
-                                        <table id="billTable" class="table" style="font-size:15px;">
-                                            <?php 
-                                                $quantidade = 0 ;
-                                                $total = 0;
-                                                $adicional = 0;
-                                                $frete = 0;
-                                                $valor = 0;
-                                            ?>
-                                            <tr>
-                                                <th>Nome</th>
-                                                <th>Restaurante</th>
-                                                <th>Prato</th>
-                                                <th width="20%">Observação</th>
-                                                <th class="right_money">Valor</th>
-                                                <th class="right_money">Frete</th>
-                                                <th class="right_money">Adicional</th>
-                                                <th>Data</th>
-                                            </tr>
-                                            @foreach($orders as $order)
-                                                <tr class="order">
-                                                    @if ($order->func_id == $employee->id)
-                                                        <td id="name">{{$employees[$order->func_id-1]->nome.' '.substr($employees[$order->func_id-1]->sobrenome, 0,10)}}</td>
-                                                        <td id="restaurant">{{$restaurant[$order->res_id-1]->nome}}</td>
-                                                        <td id="meal">{{$order->prato}}</td>
-                                                        <td id="observation">{{substr($order->observacao, 0, 15)}}</td>
-                                                        <td class="priceDiscount right_money">{{$order->valor_desconto}}</td>
-                                                        <td class="portage right_money">{{$order->frete}}</td>
-                                                        <td class="additional right_money">{{$order->adicional}}</td>
-                                                        <td class="date">{{date("d-m-Y", strtotime($order->data))}}</td>
-                                                        <?php $quantidade++;
-                                                            $valor += $order->valor_desconto;
-                                                            $frete += $order->frete;
-                                                            $adicional += $order->adicional;
-                                                        ?>
-                                                    @endif
+                                        <?php $tem=0; ?>
+                                        @foreach($orders as $order)
+                                            @if ($order->func_id == $employee->id && $order->quantidade >= 1) 
+                                                <?php $tem = 1; ?>
+                                            @endif
+                                        @endforeach 
+                                        @if ($tem == 1 )
+                                            <div class="page-break"><h3><strong><Nome:</strong> {{$employee->nome.' '.$employee->sobrenome}}</h3> <p> Período: {{date("d-m-Y", strtotime($data_inicial))}} até {{date("d-m-Y", strtotime($data_final))}}</p></div><br/><br/><br/>
+                                            <table id="billTable" class="table" style="font-size:15px;">
+                                                <?php 
+                                                    $quantidade = 0 ;
+                                                    $total = 0;
+                                                    $adicional = 0;
+                                                    $frete = 0;
+                                                    $valor = 0;
+                                                ?>
+                                                <tr>
+                                                    <th>Nome</th>
+                                                    <th>Restaurante</th>
+                                                    <th>Prato</th>
+                                                    <th width="20%">Observação</th>
+                                                    <th class="right_money">Valor</th>
+                                                    <th class="right_money">Frete</th>
+                                                    <th class="right_money">Adicional</th>
+                                                    <th>Data</th>
                                                 </tr>
-                                            @endforeach
-                                            <?php $total = $valor + $frete + $adicional; ?>
-                                            <tr>
-                                                <td><strong>Quantidade: {{$quantidade}}</strong></td>
-                                                <td></td>   
-                                                <td></td>   
-                                                <td></td>   
-                                                <td class="right_money"><strong>{{number_format($valor,2)}}</strong></td>   
-                                                <td class="right_money"><strong>{{number_format($frete,2)}}</strong></td>   
-                                                <td class="right_money"><strong>{{number_format($adicional,2)}}</strong></td>   
-                                                <td class="right_money"><strong>Total: {{number_format($total,2)}}</strong></td>   
-                                            </tr>
-                                        </table>
-                                            <div class="employeeSignature">
-                                            <p>&nbsp;</p>
-                                            <p>&nbsp;</p>
-                                            <p>&nbsp;</p>
-                                            <p>____________________________________________</p>
-                                            <p></p>
-                                            <p>{{$employee->nome.' '.$employee->sobrenome}}</p>
-                                        </div>
+                                                @foreach($orders as $order)
+                                                    <tr class="order">
+                                                        @if ($order->func_id == $employee->id)
+                                                            <td id="name">{{$employees[$order->func_id-1]->nome.' '.substr($employees[$order->func_id-1]->sobrenome, 0,10)}}</td>
+                                                            <td id="restaurant">{{$restaurant[$order->res_id-1]->nome}}</td>
+                                                            <td id="meal">{{$order->prato}}</td>
+                                                            <td id="observation">{{substr($order->observacao, 0, 15)}}</td>
+                                                            <td class="priceDiscount right_money">{{$order->valor_desconto}}</td>
+                                                            <td class="portage right_money">{{$order->frete}}</td>
+                                                            <td class="additional right_money">{{$order->adicional}}</td>
+                                                            <td class="date">{{date("d-m-Y", strtotime($order->data))}}</td>
+                                                            <?php $quantidade++;
+                                                                $valor += $order->valor_desconto;
+                                                                $frete += $order->frete;
+                                                                $adicional += $order->adicional;
+                                                            ?>
+                                                        @endif
+                                                    </tr>
+                                                @endforeach
+                                                <?php $total = $valor + $frete + $adicional; ?>
+                                                <tr>
+                                                    <td><strong>Quantidade: {{$quantidade}}</strong></td>
+                                                    <td></td>   
+                                                    <td></td>   
+                                                    <td></td>   
+                                                    <td class="right_money"><strong>{{number_format($valor,2)}}</strong></td>   
+                                                    <td class="right_money"><strong>{{number_format($frete,2)}}</strong></td>   
+                                                    <td class="right_money"><strong>{{number_format($adicional,2)}}</strong></td>   
+                                                    <td class="right_money"><strong>Total: {{number_format($total,2)}}</strong></td>   
+                                                </tr>
+                                            </table>
+                                                <div class="employeeSignature">
+                                                <p>&nbsp;</p>
+                                                <p>&nbsp;</p>
+                                                <p>&nbsp;</p>
+                                                <p>____________________________________________</p>
+                                                <p></p>
+                                                <p>{{$employee->nome.' '.$employee->sobrenome}}</p>
+                                            </div>
+                                        @endif
                                     @endforeach
                             </div>
                             <div class="modal-footer">
