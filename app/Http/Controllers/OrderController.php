@@ -212,17 +212,39 @@ class OrderController extends Controller
         $config = Config::find(1)->get();
         $horario = '';
         foreach ($config as $c) {
-            $horario = strtotime($c->horario);
+            $horario = strtotime(date('Y-m-d' . $c->horario.':00'));
+            echo $horario;
         }
 
-        $horaatual = strtotime("now");
-        
-        if($horario > $horaatual){
-            return true;
+        $horaatual = time();
+        // echo $horaatual."\n";
+        // echo $horario;
+        // die();
+        $start = new \DateTime('06:00:00');
+        $end = new \DateTime($c->horario.':00');
+        $now = new \DateTime('now');
+        // print_r($start)."\n";
+        // print_r($end)."\n";
+        // print_r($now)."\n";
+        // die();
+        if ( $start <= $now && $now <= $end ) {
+            return false;
         }
-
-        return false;
+        return true;
     }
+
+    private function checkInterval($dateInterval, $startDate, $endDate) {
+        $dateInterval = new \DateTime($dateInterval);
+        $startDate = new \DateTime($startDate);
+        $endDate = new \DateTime($endDate);
+     
+        $startDate->format('Y-m-d H:i:s.uO'); 
+        $endDate->format('Y-m-d H:i:s.uO'); 
+     
+       return ($dateInterval->getTimestamp() >= $startDate->getTimestamp() &&
+               $dateInterval->getTimestamp() <= $endDate->getTimestamp());
+     
+     } 
 
     public function block($id) 
     {
