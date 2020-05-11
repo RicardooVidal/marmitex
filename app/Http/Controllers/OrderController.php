@@ -209,6 +209,13 @@ class OrderController extends Controller
 
     public function time(): bool 
     {
+
+        $this->middleware('auth');
+
+        if (\Auth::user()) {
+            return false;
+        }
+
         $config = Config::find(1)->get();
         $horario = '';
         foreach ($config as $c) {
