@@ -46,7 +46,7 @@
     @endif
     @if(!empty(\Session::get('success')))
         <script>            
-            var file = 'http://10.0.0.102/pedido.txt'
+            var file = '/pedido.txt'
             console.log(file);
             $.get(file, function(data) {
                 alert(data);          
