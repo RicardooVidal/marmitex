@@ -124,7 +124,7 @@ class OrderController extends Controller
             $content .="  ".$qtdAdicional." " .$tipo_adicional. " Valor: " .$adicional .PHP_EOL;
             $content .= "  Valor total: ".$total .PHP_EOL;
             $content .= "  Troco p/: ".$troco .PHP_EOL;
-            $content .= "  Observação: ".$observacao .PHP_EOL;
+            $content .= "  Observacao: ".$observacao .PHP_EOL;
             $content .= "  Obrigado";
 
             $menu = Menu::find(1)->get();

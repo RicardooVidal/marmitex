@@ -49,7 +49,7 @@
             var file = '/pedido.txt'
             console.log(file);
             $.get(file, function(data) {
-                alert(data);          
+                window.open(file, '_blank');         
             });
         </script>
     @endif

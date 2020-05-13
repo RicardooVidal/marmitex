@@ -340,6 +340,12 @@
             $('#fidemployee').val(employeeId);
             $('#fmealName').val(mealName);
             $('#fprmeal').val(prMeal);
+            e.onsubmit = function(event) {
+                $.dialog({
+                    title: '<center>Aguarde...</center>',
+                    content: '<center>Gerando pedido</center>',
+                });
+            }
             jc = $.confirm({
                 title: 'Confirmar Pedido',
                 content: 'Funcionário: '+employeeName.toUpperCase() +'<br>' + ' ' +'Prato: ' +mealName + '<br>'+ 'Observação: '+ $("#fobservation").val(),
@@ -450,6 +456,12 @@
         }
 
         function callSaveOrderControllerFromForm(e) {
+            $('#formOrder').submit(function(e) {
+                $.dialog({
+                    title: '',
+                    content: '<h3><center>Aguarde...</center></h3><p><center>Gerando pedido</center></p>'
+                });
+            });
             $( "#formOrder" ).submit();
         }
 

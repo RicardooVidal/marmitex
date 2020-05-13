@@ -120,7 +120,7 @@
       <p class="navbar-brand"><a href="/home"><img src="{{ asset('assets/images/kota_sample.png')}}"></a></p>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="/app/cardapio">Cardápio</a></li>
+      <li class="active"><a href="/app/cardapio">Inserir</a></li>
       <li class="active"><a href="/app/pedido">Pedir</a></li>
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Fechamentos
