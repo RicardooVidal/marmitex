@@ -115,7 +115,7 @@ class OrderController extends Controller
             
             foreach ($orders as $o) {
                 $prato =$o->prato;
-                $content .= "    ".$o->quantidade . " " . $prato. PHP_EOL;
+                $content .= "    ".$o->quantidade . " " . $prato. " " . $o->observacao. "(".trim(\App\Helpers\AppHelper::getEmployeeName($o->func_id)).")". PHP_EOL;
                 $quantidade++;
             }
             
