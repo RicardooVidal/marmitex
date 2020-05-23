@@ -24,7 +24,7 @@ class HomeController extends Controller
     public function index()
     {
         session_start();
-        $_SESSION['globalMessage'] = 0;
+        $this->checkGlobalMessage();
         if (!$this->checkPermission()) {
             return view ('permission');
             die();
@@ -45,5 +45,12 @@ class HomeController extends Controller
         }
 
         return true;
+    }
+
+    public function checkGlobalMessage() 
+    {
+        if (!isset($_SESSION['globalMessage'])) {
+            $_SESSION['globalMessage'] = 0;
+        }
     }
 }

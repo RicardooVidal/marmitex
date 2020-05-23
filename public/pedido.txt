@@ -1,34 +1,13 @@
 Copie e cole o seguinte texto para o responsavel do Restaurante:
 
   Bom Dia, segue o pedido:
-    1 CONTRA FILE PARMEGIANA
-    1 CONTRA FILE PARMEGIANA
-    1 CONTRA FILE A CAVALO
-    1 CONTRA FILE A CAVALO
-    1 FEIJOADA
-    1 FILE DE FRANGO PARMEGIANA
-    1 CALABRESA
-    1 FILE DE FRANGO PARMEGIANA
-    1 CONTRA FILE A CAVALO
-    1 CONTRA FILE A CAVALO
-    1 CONTRA FILE PARMEGIANA
-    1 BISTECA
-    1 LINGUIÇA TOSCANA
-    1 FILE DE FRANGO PARMEGIANA
-    1 LINGUIÇA TOSCANA
-    1 CONTRA FILE A CAVALO
-    1 FILE DE FRANGO PARMEGIANA
-    1 CONTRA FILE A CAVALO
-    1 LINGUIÇA TOSCANA
-    1 CALABRESA
-    1 LINGUIÇA TOSCANA
-    1 LINGUIÇA TOSCANA
-    1 CONTRA FILE PARMEGIANA
+    1 TESTE (Carlos)
+    1 TESTE SDFSDAGDRGSDRHSTT(Andre)
 
-  Total: 23 Marmitex
+  Total: 2 Marmitex
   Frete: 0,00
   1 Refrigerante 2L Valor: 0,00
-  Valor total: 276,00
+  Valor total: 24,00
   Troco p/: 0
   Observacao: 
   Obrigado

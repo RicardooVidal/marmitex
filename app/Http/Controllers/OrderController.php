@@ -24,6 +24,7 @@ class OrderController extends Controller
 
     public function index()
     {
+        $this->checkGlobalMessage();
         $menu = Menu::find(1)->get();
         $res_id = 0;
         foreach ($menu as $m) {
@@ -422,6 +423,13 @@ class OrderController extends Controller
 
         return view('home')->with('orderClosed', 'Pedido fechado com sucesso.');
 
+    }
+
+    public function checkGlobalMessage() 
+    {
+        if (!isset($_SESSION['globalMessage'])) {
+            $_SESSION['globalMessage'] = 0;
+        }
     }
 
 }

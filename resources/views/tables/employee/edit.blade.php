@@ -20,7 +20,7 @@
         <li class="list-group-item">
             <div class="form-group">
                 <label for="nome">Nome:</label>
-                <input type="text"  class="form-control" id="fnome" name="nome" placeholder="Nome" value="{{old('nome', $employee->nome)}}" >
+                <input type="text" class="form-control" id="fnome" name="nome" placeholder="Nome" value="{{old('nome', $employee->nome)}}" >
                 <label for="nome">Sobrenome:</label>
                 <input type="text"  class="form-control" id="fsobrenome" name="sobrenome" placeholder="Sobrenome" value="{{old('sobrenome', $employee->sobrenome)}}" >
                 <label for="endereço">Mensagem:</label>
