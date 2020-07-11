@@ -27,7 +27,10 @@ class RestaurantController extends Controller
 
     public function index()
     {
-
+        if (!HomeController::checkPermission()) {
+            return view ('permission');
+            die();
+        }
         $restaurants = Restaurant::all()->toArray();
         return view('tables.restaurant', compact('restaurants'));
     }

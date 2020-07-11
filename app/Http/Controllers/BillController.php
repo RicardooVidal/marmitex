@@ -30,6 +30,10 @@ class BillController extends Controller
 
     public function index()
     {
+        if (!HomeController::checkPermission()) {
+            return view ('permission');
+            die();
+        }
         $employees = Employee::all()->toArray();
         $orders = array();
         return view('bill.index')->with('employees',$employees)->with('orders', $orders);

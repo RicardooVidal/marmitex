@@ -24,6 +24,10 @@ class OrderController extends Controller
 
     public function index()
     {
+        if (!HomeController::checkPermission()) {
+            return view ('permission');
+            die();
+        }
         $this->checkGlobalMessage();
         $menu = Menu::find(1)->get();
         $res_id = 0;

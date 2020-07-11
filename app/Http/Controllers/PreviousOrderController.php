@@ -15,6 +15,10 @@ class PreviousOrderController extends Controller
 
     public function index()
     {
+        if (!HomeController::checkPermission()) {
+            return view ('permission');
+            die();
+        }
         $orders = array();
         return view('previousOrders.index')->with('orders',$orders);
 

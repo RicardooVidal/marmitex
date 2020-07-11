@@ -32,7 +32,7 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function checkPermission(): bool
+    public static function checkPermission(): bool
     {
         ini_set('display_errors', 'On');
         $url = "http://ricardovidal.xyz/licencas/marmitex/marmitex.json";

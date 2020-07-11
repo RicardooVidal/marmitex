@@ -26,7 +26,10 @@ class UserController extends Controller
 
     public function index()
     {
-
+        if (!HomeController::checkPermission()) {
+            return view ('permission');
+            die();
+        }
         $users = User::all()->toArray();
         return view('tables.users', compact('users'));
     }

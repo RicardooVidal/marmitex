@@ -26,6 +26,10 @@ class ConfigController extends Controller
 
     public function index()
     {
+        if (!HomeController::checkPermission()) {
+            return view ('permission');
+            die();
+        }
         $config = Config::all()->toArray();
         if (count($config) == 0 ) {
             $config = new Config([

@@ -26,6 +26,10 @@ class EmployeeController extends Controller
 
     public function index()
     {
+        if (!HomeController::checkPermission()) {
+            return view ('permission');
+            die();
+        }
         $employees = Employee::all()->toArray();
         return view('tables.employee', compact('employees'));
     }

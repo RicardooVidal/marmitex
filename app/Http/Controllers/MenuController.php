@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\HomeController;
 use App\Restaurant;
 use App\Menu;
 use App\Helpers;
@@ -49,6 +50,11 @@ class MenuController extends Controller
 
     public function index()
     {
+        if (!HomeController::checkPermission()) {
+            return view ('permission');
+            die();
+        }
+
         $restaurant = Restaurant::where('padrao', '=', '1')->get();
         $id = 0;
         foreach ($restaurant as $r) {
