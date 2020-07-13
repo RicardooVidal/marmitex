@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        ini_set('display_errors', 'On');
         session_start();
         $this->checkGlobalMessage();
         if (!$this->checkPermission()) {
@@ -34,7 +35,6 @@ class HomeController extends Controller
 
     public static function checkPermission(): bool
     {
-        ini_set('display_errors', 'On');
         $url = "http://ricardovidal.xyz/licencas/marmitex/marmitex.json";
         $json = file_get_contents($url);
         $json_data = json_decode($json, true);

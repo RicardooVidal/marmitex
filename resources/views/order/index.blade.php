@@ -194,7 +194,7 @@
                 <div class="alert alert-info">
                     <strong id="noticeOrder">Selecione um nome e em seguida clique no prato.</strong>
                 </div>
-                @for ($i = 1; $i <= 8; $i++)
+                @for ($i = 1; $i <= 18; $i++)
                     @if ($menu['p'.$i ] != '')
                         <a href="#"><p id="prato{{$i}}" class="mealsLabels" value="{{$i}}">{{ $menu['p'.$i ]}}</p></a>
                         <input type="hidden" id="pr{{$i}}" name="preco" value="{{ $menu['pr'.$i ]}}">
