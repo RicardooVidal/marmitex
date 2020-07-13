@@ -30,6 +30,9 @@ class UserController extends Controller
             return view ('permission');
             die();
         }
+
+        HomeController::checkGlobalMessage();
+
         $users = User::all()->toArray();
         return view('tables.users', compact('users'));
     }

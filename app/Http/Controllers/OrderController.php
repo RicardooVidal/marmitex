@@ -28,6 +28,9 @@ class OrderController extends Controller
             return view ('permission');
             die();
         }
+
+        HomeController::checkGlobalMessage();
+
         $this->checkGlobalMessage();
         $menu = Menu::find(1)->get();
         $res_id = 0;

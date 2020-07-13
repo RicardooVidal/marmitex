@@ -47,7 +47,7 @@ class HomeController extends Controller
         return true;
     }
 
-    public function checkGlobalMessage() 
+    public static function checkGlobalMessage() 
     {
         if (!isset($_SESSION['globalMessage'])) {
             $_SESSION['globalMessage'] = 0;

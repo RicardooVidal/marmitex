@@ -31,6 +31,9 @@ class RestaurantController extends Controller
             return view ('permission');
             die();
         }
+
+        HomeController::checkGlobalMessage();
+
         $restaurants = Restaurant::all()->toArray();
         return view('tables.restaurant', compact('restaurants'));
     }

@@ -75,6 +75,8 @@ class MenuController extends Controller
             die();
         }
 
+        HomeController::checkGlobalMessage();
+
         $restaurant = Restaurant::where('padrao', '=', '1')->get();
         $id = 0;
         foreach ($restaurant as $r) {

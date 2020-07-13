@@ -30,6 +30,9 @@ class EmployeeController extends Controller
             return view ('permission');
             die();
         }
+
+        HomeController::checkGlobalMessage();
+
         $employees = Employee::all()->toArray();
         return view('tables.employee', compact('employees'));
     }

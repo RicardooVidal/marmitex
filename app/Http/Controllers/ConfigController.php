@@ -30,6 +30,9 @@ class ConfigController extends Controller
             return view ('permission');
             die();
         }
+
+        HomeController::checkGlobalMessage();
+
         $config = Config::all()->toArray();
         if (count($config) == 0 ) {
             $config = new Config([

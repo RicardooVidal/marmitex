@@ -34,6 +34,9 @@ class BillController extends Controller
             return view ('permission');
             die();
         }
+
+        HomeController::checkGlobalMessage();
+
         $employees = Employee::all()->toArray();
         $orders = array();
         return view('bill.index')->with('employees',$employees)->with('orders', $orders);

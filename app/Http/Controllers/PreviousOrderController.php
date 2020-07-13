@@ -19,6 +19,9 @@ class PreviousOrderController extends Controller
             return view ('permission');
             die();
         }
+
+        HomeController::checkGlobalMessage();
+
         $orders = array();
         return view('previousOrders.index')->with('orders',$orders);
 
