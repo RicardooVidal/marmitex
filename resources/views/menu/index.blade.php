@@ -121,8 +121,8 @@
                             <input type="text"  class="form-control" id="fpr18" name="pr18" placeholder="Preço Prato 18" value="{{ $menu['pr18'] }}" >
                         </div>
                     </div>
-                </li><br/>
-                <input type="submit" class="btn btn-primary" value="Inserir" value = 1><br/>
+                </li><br>
+                <input type="submit" class="btn btn-primary" value="Inserir" value = 1 style="margin-bottom: 25px"><br>
             </form>
         </div>
     @endif

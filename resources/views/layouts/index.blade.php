@@ -67,6 +67,10 @@
           bottom: 0;
           width: 100%;
           background-color: grey;
+          text-align: center;
+        }
+
+        .footer p{
           color: white;
           text-align: center;
         }
