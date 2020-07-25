@@ -155,7 +155,7 @@
                             <h3 class="modal-title"><strong>Período: {{date("d-m-Y", strtotime($data_inicial))}} até {{date("d-m-Y", strtotime($data_final))}} </strong></h3>
                         </div>
                         <div id="billDiv" class="modal-body">
-                            <h3><strong><Nome:</strong> {{\App\Helpers\AppHelper::getEmployeeName($funcionario).' '.\App\Helpers\AppHelper::getEmployeesSurname($funcionario)}} </h3> 
+                            <h3><strong><Nome:</strong> {{\App\Helpers\AppHelper::getEmployeeName($funcionario).' '.\App\Helpers\AppHelper::getEmployeeSurname($funcionario)}} </h3> 
                             <p>Período: {{date("d-m-Y", strtotime($data_inicial))}} até {{date("d-m-Y", strtotime($data_final))}} </p>
                             <table id="billTable" class="table">
                                 <?php 
