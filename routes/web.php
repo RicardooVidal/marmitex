@@ -84,4 +84,4 @@ Route::post('/app/cobranca/gerar', 'BillController@generateDropOfBill')->name('b
 /* Consulta de Pedido Anterior */
 Route::get('/app/consulta_pedido', 'PreviousOrderController@index')->name('previous.index');
 Route::post('/app/consulta_pedido/consultar', 'PreviousOrderController@consultPrevious')->name('previous.consult');
-
+Route::post('/app/consulta_pedido/imprimir', 'PreviousOrderController@print')->name('previous.print');

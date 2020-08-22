@@ -2,6 +2,9 @@
 namespace App\Helpers;
 use App\Employee;
 use App\Restaurant;
+use Exception;
+use mikehaertl\wkhtmlto\Pdf;
+
 class AppHelper
 {
 
@@ -12,6 +15,7 @@ class AppHelper
     
     public function convertToMoney($value) : string
     {
+        $value = (float) $value;
         $valueConverted = str_replace(',','.',$value); 
         $valueConverted = number_format($valueConverted,2);
 
@@ -30,22 +34,29 @@ class AppHelper
         }
     }
 
-    public function generateHtml2PDF($name, $value)
+    public function parseHtml2PDF($htmlPath, $content, $pdfPath, $print)
     {
-        $fp = fopen($_SERVER['DOCUMENT_ROOT'] . "/".$name.".html","wb");
-        $value = $this->removeAcentuacao(utf8_decode($value));
-        fwrite($fp,$value);
-        fclose($fp);
-        $file = fopen("cobranca.html", "r") or die("Unable to open file!");
-        $content = fread($file,filesize("cobranca.html"));
-
         try {
+            //$fp = fopen($_SERVER['DOCUMENT_ROOT'] . "/$name","wb");
+            $value = $this->removeAcentuacao(utf8_decode($content));
+            $file = "/tmp/$htmlPath";
+            file_put_contents($file, $value);
 
-        } catch (Html2PdfException $e) {
-            $formatter = new ExceptionFormatter($e);
-            echo $formatter->getHtmlMessage();
+            if(!$file)
+                throw new Exception('Unable to create file. Please check app permissions!');
+            
+            @chmod ($file, 0777); 
+
+            $pdf = new Pdf($file);
+            $pdf->saveAs($pdfPath);
+
+            if ($print) {
+                $pdf->send($pdfPath);
+            }
+
+        } catch (Exception $e) {
+            throw new Exception($e);
         }
-
     }
 
     public function removeAcentuacao($word): string
@@ -64,19 +75,27 @@ class AppHelper
     
     }
 
+    public function generateHtmlName() {
+        return 'html_'.uniqid().'.html';
+    }
+
 
     static function getEmployeeName($id) 
     {
+        $id = (integer) $id;
         $employee = Employee::where('id', $id)->get();
+        $name = '';
         foreach($employee as $e) {
             $name = $e->nome;
         }
+
         return $name;
     }
 
     static function getEmployeeSurname($id) 
     {
         $employee = Employee::where('id', $id)->get();
+        $surname = '';
         foreach($employee as $e) {
             $surname = $e->sobrenome;
         }
@@ -90,5 +109,12 @@ class AppHelper
             $nome = $r->nome;
         }
         return $nome;
+    }
+
+    public function exportToPdf($content, $name, $htmlPath)
+    {
+        $htmlPath = $this->generateHtmlName();
+        $path = "cobrancas/".trim($name).".pdf";
+        $this->parseHtml2PDF($htmlPath,$content,$path, true);
     }
 }

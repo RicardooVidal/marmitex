@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Validator;
 
 class BillController extends Controller
 {
+
+    private $htmlPath;
+
     /**
      * Create a new controller instance.
      *
@@ -90,11 +93,6 @@ class BillController extends Controller
         return view('bill.index')->with('employees',$employees)->with('restaurant', $restaurant)->with('orders', $orders)->with('data_inicial', $data_inicial)->with('data_final', $data_final)->with('funcionario', $funcionario);
     }
 
-    public function generatePdfByBill(Request $request) {
-        $content = $request['code'];
-        \App\Helpers\AppHelper::instance()->generateHtml2PDF('cobranca',$content);
-    }
-
     public function generateDropOfBill(Request $request) {
 
         $data_inicial  = $request->get('data_inicial');
@@ -119,11 +117,11 @@ class BillController extends Controller
         }
 
         $content = $request['code'];
-        \App\Helpers\AppHelper::instance()->generateHtml2PDF('cobranca',$content);
-        shell_exec("wkhtmltopdf cobranca.html cobrancas/".trim($name).".pdf");
+        \App\Helpers\AppHelper::instance()->exportToPdf($content, $name, $this->htmlPath);
         $employees = Employee::all()->toArray();
-        $orders = array();
+        $orders = [];
         return view('bill.index')->with('employees',$employees)->with('orders', $orders);
-
     }
+
+
 }
