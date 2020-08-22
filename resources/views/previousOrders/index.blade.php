@@ -103,11 +103,11 @@
                         </table>
                         </div>
                         <div class="modal-footer">
-                            <form id="previousOrderPrint" action="/app/consulta_pedido/imprimir" method="POST">
+                            <!-- <form id="previousOrderPrint" action="/app/consulta_pedido/imprimir" method="POST">
                                 @csrf
                                 <input type="hidden" id="previousOrderCode" name="code">
                                 <button class="btn btn-primary" form="previousOrderPrint">Imprimir</button>
-                            </form>
+                            </form> -->
                             <button type="button" class="btn btn-white" data-dismiss="modal">Fechar</button>
                         </div>
                     </div>
