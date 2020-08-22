@@ -133,8 +133,8 @@
                                     <th class="right_money">Valor -50%</th>
                                     <th class="right_money">Frete</th>
                                     <th class="right_money">Adicional</th>
-                                    <th class="right_money">Valor Total</th>
-                                    <th class="right_money">Valor Total -50%</th>
+                                    <!-- <th class="right_money">Valor Total</th>
+                                    <th class="right_money">Valor Total -50%</th> -->
                                 </tr>
                                 @for($i = 0; $i < count($orders);$i++)
                                     @if($orders[$i][0]['quantidade'] != 0)
@@ -155,8 +155,8 @@
                                             <td class="priceDiscount right_money">{{\App\Helpers\AppHelper::instance()->convertToMoney($valor_desconto)}}</td>
                                             <td class="portage right_money">{{\App\Helpers\AppHelper::instance()->convertToMoney($frete)}}</td>
                                             <td class="additional right_money">{{\App\Helpers\AppHelper::instance()->convertToMoney($adicional)}}</td>
-                                            <td class="total right_money">{{\App\Helpers\AppHelper::instance()->convertToMoney($total)}}</td>
-                                            <td class="total_desconto right_money">{{\App\Helpers\AppHelper::instance()->convertToMoney($total_desconto)}}</td>
+                                            <!-- <td class="total right_money">{{\App\Helpers\AppHelper::instance()->convertToMoney($total)}}</td>
+                                            <td class="total_desconto right_money">{{\App\Helpers\AppHelper::instance()->convertToMoney($total_desconto)}}</td> -->
 
                                             <?php 
                                                 $quantidade_geral += $quantidade;
@@ -178,8 +178,8 @@
                                     <td class="right_money"><strong>{{\App\Helpers\AppHelper::instance()->convertToMoney($valor_desconto_geral)}}</strong></td>     
                                     <td class="right_money"><strong>{{\App\Helpers\AppHelper::instance()->convertToMoney($frete_geral)}}</strong></td>   
                                     <td class="right_money"><strong>{{\App\Helpers\AppHelper::instance()->convertToMoney($adicional_geral)}}</strong></td>   
-                                    <td class="right_money"><strong>{{\App\Helpers\AppHelper::instance()->convertToMoney($total_geral)}}</strong></td>  
-                                    <td class="right_money"><strong>{{\App\Helpers\AppHelper::instance()->convertToMoney($total_desconto_geral)}}</strong></td>  
+                                    <!-- <td class="right_money"><strong>{{\App\Helpers\AppHelper::instance()->convertToMoney($total_geral)}}</strong></td>  
+                                    <td class="right_money"><strong>{{\App\Helpers\AppHelper::instance()->convertToMoney($total_desconto_geral)}}</strong></td>   -->
                                 </tr>
                             </table>
                         </div>
