@@ -30,7 +30,7 @@
                     <input type="text"  class="form-control" id="fmensagem" name="mensagem" placeholder="Se preencher este campo, uma mensagem vai aparecer quando o usuário abrir o sistema" value="{{old('mensagem', $config->mensagem)}}"><br/>
                     <label for="mensagem">Zebra Tag API (Windows):</label>
                     <input type="text"  class="form-control" id="fzebra" name="zebra" value="{{old('mensagem', $config->zebra)}}"><br/>
-                    <p>Licença: http://ricardovidal.xyz/licencas/marmitex</p>
+                    <p>Licença: </p>
                     <input type="submit" class="btn btn-primary" value="Salvar">
                 </div>
             </form>

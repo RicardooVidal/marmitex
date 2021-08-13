@@ -26,10 +26,7 @@ class HomeController extends Controller
         ini_set('display_errors', 'On');
         session_start();
         $this->checkGlobalMessage();
-        if (!$this->checkPermission()) {
-            return view ('permission');
-            die();
-        }
+
         return view('home');
     }
 

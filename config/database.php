@@ -63,6 +63,18 @@ return [
             ]) : [],
         ],
 
+        'mysql_billing' => [
+            'driver' => 'mysql',
+            'host' => env('BILLING_HOST'),
+            'port' => env('BILLING_PORT'),
+            'database' => env('BILLING_DATABASE'),
+            'username' => env('BILLING_USERNAME'),
+            'password' => env('BILLING_PASSWORD'),
+            'unix_socket' => env('BILLING_SOCKET'),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),

@@ -17,6 +17,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "mikehaertl/phpwkhtmltopdf": "^2.4",
+        "nesbot/carbon": "^2.51",
         "nitmedia/wkhtml2pdf": "dev-master"
     },
     "require-dev": {

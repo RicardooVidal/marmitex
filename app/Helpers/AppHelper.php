@@ -2,6 +2,7 @@
 namespace App\Helpers;
 use App\Employee;
 use App\Restaurant;
+use Carbon\Carbon;
 use Exception;
 use mikehaertl\wkhtmlto\Pdf;
 
@@ -116,5 +117,37 @@ class AppHelper
         $htmlPath = $this->generateHtmlName();
         $path = "cobrancas/".trim($name).".pdf";
         $this->parseHtml2PDF($htmlPath,$content,$path, true);
+    }
+
+    public static function checkLicense()
+    {
+        $company = env('COMPANY');
+        
+        $today = Carbon::now()->toDateString();
+
+        try {
+            $billing = \DB::connection('mysql_billing')->select('SELECT * FROM billing_marmitex WHERE company = ' . "'" . $company . "'");
+            
+            $billing = $billing[0];
+
+            // Verifica se está ativo
+            if (!$billing->active == 1) {
+                return [
+                    'msg' => "Licenca do company {$company} nao encontrado",
+                    'status' => 'error'
+                ];
+            }
+
+            return [
+                'msg' => 'Licença Ok.',
+                'status' => 'ok'
+            ];
+
+        } catch (Exception $e) {
+            return [
+                'msg' => 'Não foi possível validar a licença. Verifique sua conexão com a internet. Se o erro persistir, entre em contato em contato@ricardovidal.xyz',
+                'status' => 'error'
+            ];
+        }
     }
 }
